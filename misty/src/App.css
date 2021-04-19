@@ -1,6 +1,25 @@
-.App {
-  text-align: center;
+
+
+.product-img {
+    width:200px;
+    height:370px;
+    object-fit: cover;
+    margin-bottom:3px;
 }
+
+.product-card {
+    margin-bottom:12px;
+}
+
+p, .product-desc {
+    /* text-align: center; */
+    height:5%;
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    padding:15px;
+    
+}
+
 
 .App-logo {
   height: 40vmin;

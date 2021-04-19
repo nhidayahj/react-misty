@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-// import './App.css';
+import './App.css';
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,7 +7,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
-import Register from './pages/Register';
+import Register from './pages/members/Register';
+import NewMembers from './pages/members/NewMembers';
+import Login from './pages/members/Login';
+import Profile from './pages/members/Profile';
 
 
 function App() {
@@ -31,6 +34,9 @@ function App() {
                     <li className="nav-item">
                         <Link className="nav-link" to="/signup">Sign Up</Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/login">Login</Link>
+                    </li>
                 </ul>
                 <Switch>
                     <Route exact path='/about'>
@@ -44,6 +50,15 @@ function App() {
                     </Route>
                     <Route exact path='/signup'>
                         <Register/>
+                    </Route>
+                    <Route exact path='/new-member'>
+                        <NewMembers/>
+                    </Route>
+                    <Route exact path='/login'>
+                        <Login/>
+                    </Route>
+                    <Route exact path='/profile'>
+                        <Profile/>
                     </Route>
                     
                 </Switch>
