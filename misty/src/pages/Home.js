@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import config from '../config';
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button
@@ -14,7 +15,7 @@ export default function Home() {
 
     useEffect(() => {
         const fetch = async () => {
-            let response = await axios.get(baseUrl + '/api/products/diffusers');
+            let response = await axios.get(config.baseUrl + '/api/products/diffusers');
             setDiffusers(response.data);
             console.log(response.data)
         }
@@ -34,6 +35,7 @@ export default function Home() {
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{diffuser.category.name}</CardSubtitle>
                                 <CardText className="product-desc">{diffuser.description}</CardText>
                                 <Button color="warning" className="mr-3">View</Button>
+                                
                                 <Button color="info">Add to Cart</Button>
                             </CardBody>
                         </Card>

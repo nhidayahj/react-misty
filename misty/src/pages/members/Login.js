@@ -27,20 +27,14 @@ export default class Login extends React.Component {
                 password:this.state.password
             })
             if(submitLogin.status === 200) {
-                // console.log(submitLogin);
+                console.log(submitLogin);
                 localStorage.setItem('accessToken',submitLogin.data.accessToken)
                 localStorage.setItem('refreshToken',submitLogin.data.refreshToken)
-                // let accessToken=submitLogin.data.accessToken;
-                // let refreshToken=submitLogin.data.refreshToken;
                 window.location = `/profile`
             } else {
                 console.log(submitLogin.status)
                 this.invalidAlert();
             }
-            // if (submitLogin.status === 500) {
-            //     console.log("member data: ",submitLogin.data)
-                
-            // }
         }
     }
 
