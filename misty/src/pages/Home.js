@@ -7,15 +7,17 @@ import {
     CardTitle, CardSubtitle, Button
 } from 'reactstrap';
 
-const baseUrl = "https://3001-emerald-herring-pjfc5f72.ws-us03.gitpod.io"
+const baseUrl = config.baseUrl
 
 export default function Home() {
 
     const [diffusers, setDiffusers] = useState([]);
+    // to search use useEffect
+
 
     useEffect(() => {
         const fetch = async () => {
-            let response = await axios.get(config.baseUrl + '/api/products/diffusers');
+            let response = await axios.get(baseUrl + '/api/products/diffusers');
             setDiffusers(response.data);
             console.log(response.data)
         }
@@ -27,16 +29,16 @@ export default function Home() {
         for (let diffuser of diffusers) {
             products.push(
                 <React.Fragment>
-                    <div className="col-md-4">
+                    <div className="col-lg-4 col-md-6">
                         <Card className="product-card">
                             <CardImg className="product-img" src={diffuser.image_url} alt="Card image cap" />
-                            <CardBody>
+                            <CardBody className="product-body">
                                 <CardTitle tag="h5">{diffuser.diffuser_name}</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{diffuser.category.name}</CardSubtitle>
                                 <CardText className="product-desc">{diffuser.description}</CardText>
-                                <Button color="warning" className="mr-3">View</Button>
-                                
-                                <Button color="info">Add to Cart</Button>
+                                <Button color="warning" className="mr-3 product-view">View</Button>
+                        
+                                <Button color="info add-to-cart">Add to Cart</Button>
                             </CardBody>
                         </Card>
                     </div>

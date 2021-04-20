@@ -1,5 +1,3 @@
-
-
 .product-img {
     width:200px;
     height:370px;
@@ -11,12 +9,16 @@
     margin-bottom:12px;
 }
 
+.product-body{
+    padding:10px;
+}
+
 p, .product-desc {
     /* text-align: center; */
     height:5%;
     font-family: 'EB Garamond', serif;
     font-size: 18px;
-    padding:15px;
+    /* padding:15px; */
     
 }
 
