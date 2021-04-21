@@ -12,8 +12,8 @@ const baseUrl = config.baseUrl
 export default function Home() {
 
     const [diffusers, setDiffusers] = useState([]);
+    const [customerId, setCustomerId] = useState('');
     // to search use useEffect
-
 
     useEffect(() => {
         const fetch = async () => {

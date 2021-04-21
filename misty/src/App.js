@@ -12,6 +12,7 @@ import NewMembers from './pages/members/NewMembers';
 import Login from './pages/members/Login';
 import Profile from './pages/members/Profile';
 import Cart from './pages/members/Cart';
+import ConfirmOrder from './pages/members/ConfirmOrder';
 
 
 function App() {
@@ -63,6 +64,9 @@ function App() {
                     </Route>
                     <Route exact path='/profile/:customer_id'>
                         <Cart/>
+                    </Route>
+                    <Route exact path='/profile/:customer_id/confirm'>
+                        <ConfirmOrder/>
                     </Route>
                     
                 </Switch>
