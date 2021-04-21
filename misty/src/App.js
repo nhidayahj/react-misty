@@ -18,64 +18,73 @@ import ConfirmOrder from './pages/members/ConfirmOrder';
 function App() {
     return (
         <Router>
-            
-                {/* <div className="navbar-header">
+
+            {/* <div className="navbar-header">
                     <Link className="navbar-brand" to="/">Misty</Link>
                 </div> */}
-                <ul className="nav justify-content-center">
-                    
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/about">About</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/contactus">Contact Us</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/">Catalog</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/signup">Sign Up</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/login">Login</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/profile/cart">Cart</Link>
-                    </li>
-                </ul>
-                <Switch>
-                    <Route exact path='/about'>
-                        <AboutUs/>
-                    </Route>
-                    <Route exact path='/contactus'>
-                        <ContactUs/>
-                    </Route>
-                    <Route exact path='/'>
-                        <Home/>
-                    </Route>
-                    <Route exact path='/signup'>
-                        <Register/>
-                    </Route>
-                    <Route exact path='/new-member'>
-                        <NewMembers/>
-                    </Route>
-                    <Route exact path='/login'>
-                        <Login/>
-                    </Route>
-                    <Route exact path='/profile'>
-                        <Profile/>
-                    </Route>
-                    <Route exact path='/profile/cart'>
-                        <Cart/>
-                    </Route>
-                    
-                    <Route exact path='/profile/:customer_id/confirm'>
-                        <ConfirmOrder/>
-                    </Route>
-                    
-                </Switch>
+            <ul className="nav justify-content-center">
 
-            
+                <li className="nav-item">
+                    <Link className="nav-link" to="/about">About</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/contactus">Contact Us</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/">Catalog</Link>
+                </li>
+                {/* <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Catalog
+                    </a>
+                    <div className="dropdown-menu">
+                        <Link to="/diffusers" className="dropdown-item" >Diffusers</Link>
+                        <Link to="/oils" className="dropdown-item">Essential Oils</Link>
+                    </div>
+                </li> */}
+                <li className="nav-item">
+                    <Link className="nav-link" to="/signup">Sign Up</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/login">Login</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/profile/cart">Cart</Link>
+                </li>
+            </ul>
+            <Switch>
+                <Route exact path='/about'>
+                    <AboutUs />
+                </Route>
+                <Route exact path='/contactus'>
+                    <ContactUs />
+                </Route>
+                <Route exact path='/'>
+                    <Home />
+                </Route>
+                <Route exact path='/signup'>
+                    <Register />
+                </Route>
+                <Route exact path='/new-member'>
+                    <NewMembers />
+                </Route>
+                <Route exact path='/login'>
+                    <Login />
+                </Route>
+                <Route exact path='/profile'>
+                    <Profile />
+                </Route>
+                <Route exact path='/profile/cart'>
+                    <Cart />
+                </Route>
+
+                <Route exact path='/shipping'>
+                    <ConfirmOrder />
+                </Route>
+
+            </Switch>
+
+
         </Router>
     );
 }

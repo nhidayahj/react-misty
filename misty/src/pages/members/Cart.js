@@ -148,8 +148,11 @@ export default function Cart() {
 
     const history = useHistory();
     const confirmOrder = () => {
-        alert("Customer confirming order");
-        history.push(`/profile/${customer_id}/confirm`);
+        // alert("Customer confirming order");
+        history.push(`/shipping`, {
+            'diffusers':diffuserItem,
+            'oils':oilItem
+        });
     }
 
     return (
