@@ -3,7 +3,7 @@ import axios from 'axios';
 import config from '../../config';
 import { useLocation, useHistory } from 'react-router-dom';
 import {
-    ListGroup, ListGroupItem, Button, InputGroup, InputGroupAddon, Input
+    ListGroup, ListGroupItem, Button,
 } from 'reactstrap';
 
 
@@ -14,7 +14,7 @@ const baseUrl = config.baseUrl;
 export default function Cart() {
     const customer_id = localStorage.getItem('customer_id')
     const [isLoggedIn, setLoggedIn] = useState(false);
-    // const [customer, setCustomer] = useState('')
+    const [customer, setCustomer] = useState('')
     const [diffuserItem, setDiffuser] = useState([]);
     const [oilItem, setOil] = useState([]);
     // const [cartItems, setCartItems] = useState({})
@@ -27,9 +27,10 @@ export default function Cart() {
             // check if customer is logged in
             if (localStorage.getItem('customer_id') !== null) {
                 setLoggedIn(true);
+                setCustomer(localStorage.getItem('customer_id'))
                 // then get the customer's cart items
                 let items = await axios.get(baseUrl +
-                    `/api/shoppingCart/${customer_id}`);
+                    `/api/shoppingCart/${localStorage.getItem('customer_id')}`);
                 // separate diffusers & oils
                 setDiffuser(items.data.diffusers)
                 setOil(items.data.oils)
@@ -42,7 +43,7 @@ export default function Cart() {
             }
         }
         fetch();
-    }, [])
+    }, [customer])
 
     console.log("Diffuser Items:", diffuserItem);
     console.log("Oil Items:", oilItem);
@@ -69,6 +70,11 @@ export default function Cart() {
     const updateDiffQty = async (e) => {
         let customer_id = localStorage.getItem('customer_id');
         let updateQty = await axios.get(`${baseUrl}/diffuser/${customer_id}/${e.target.name}/update`);
+        if (updateQty.data.status == 200 ) {
+            return alert("Quantity updated")
+        } else {
+            return alert("Product is running low.")
+        }
     }
 
     const incrementOilQty = (e) => {

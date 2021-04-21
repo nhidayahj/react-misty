@@ -39,6 +39,9 @@ function App() {
                     <li className="nav-item">
                         <Link className="nav-link" to="/login">Login</Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/profile/cart">Cart</Link>
+                    </li>
                 </ul>
                 <Switch>
                     <Route exact path='/about'>
@@ -62,9 +65,10 @@ function App() {
                     <Route exact path='/profile'>
                         <Profile/>
                     </Route>
-                    <Route exact path='/profile/:customer_id'>
+                    <Route exact path='/profile/cart'>
                         <Cart/>
                     </Route>
+                    
                     <Route exact path='/profile/:customer_id/confirm'>
                         <ConfirmOrder/>
                     </Route>
