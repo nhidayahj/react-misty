@@ -13,6 +13,7 @@ import Login from './pages/members/Login';
 import Profile from './pages/members/Profile';
 import Cart from './pages/members/Cart';
 import ConfirmOrder from './pages/members/ConfirmOrder';
+import Checkout from './pages/members/Checkout';
 
 
 function App() {
@@ -77,9 +78,11 @@ function App() {
                 <Route exact path='/profile/cart'>
                     <Cart />
                 </Route>
-
                 <Route exact path='/shipping'>
                     <ConfirmOrder />
+                </Route>
+                <Route exact path='/checkout'>
+                    <Checkout />
                 </Route>
 
             </Switch>

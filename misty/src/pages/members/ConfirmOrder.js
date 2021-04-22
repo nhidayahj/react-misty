@@ -114,6 +114,22 @@ export default function ConfirmOrder() {
         }
     }
 
+    // this btn creates an instance for the vendor 
+    // to capture order items 
+    const checkoutOrder = async(e) => {
+        if(submitOrder) {
+            let response = await axios.get(`${baseUrl}/api/checkout/${e.target.name}/orders`);
+            if (response.status === 200) {
+                console.log(response.data);
+                history.push('/checkout', {
+                    'orderDiffusers':response.data.diffusers,
+                    'orderOils':response.data.oils,
+                    'total':totalAmt
+                })
+            }
+        }
+    }
+
     return (
         <React.Fragment>
             <div className="container">
@@ -146,7 +162,7 @@ export default function ConfirmOrder() {
                     </Col>
                 </Row>
                 <div>
-                    <Button onClick={submitOrder}>Add Shipping</Button>
+                    <Button onClick={submitOrder} name={localStorage.getItem('customer_id')}>Add Shipping</Button>
                 </div>
 
                 <div className="mt-4">
@@ -160,7 +176,7 @@ export default function ConfirmOrder() {
                             <h3>Total Amount: {totalAmt} SGD</h3>
                             <p>Need changes to shopping cart? <Link to="/profile/cart">Back to cart.</Link></p>
                             {orderFlag ? <Button color="primary"
-                                name={localStorage.getItem('customer_id')}>Proceed to Checkout</Button> : null}
+                                name={localStorage.getItem('customer_id')} onClick={checkoutOrder}>Proceed to Checkout</Button> : null}
                         </Col>
                     </Row>
                 </div>
