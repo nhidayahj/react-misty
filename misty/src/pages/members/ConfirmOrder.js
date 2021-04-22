@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Row, Button, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config'
 
@@ -8,51 +8,74 @@ const baseUrl = config.baseUrl;
 
 export default function ConfirmOrder() {
 
-    const location = useLocation();
-    let diffuserItems = location.state.diffusers;
-    let oilItems = location.state.oils;
-
     const [shipOrderData, setShipOrder] = useState({
         'street_name': '',
         'postal_code': '',
         'unit_code': '',
     })
 
-    const [orderFlag, setOrderFlag] = useState(false)
+    const [orderFlag, setOrderFlag] = useState(false);
+    const [diffuserOrder, setDiffuserOrder] = useState([]);
+    const [oilOrder, setOilOrder] = useState([]);
+    const [totalAmt, setTotalAmt] = useState('')
+    const [isLoggedIn, setLoggedIn] = useState(false)
+    const [isLoaded, setLoaded] = useState(false)
+
+    const history = useHistory();
+    const location = useLocation();
+
+    useEffect(() => {
+        const fetch = async () => {
+            if (localStorage.getItem('customer_id') !== null) {
+                setLoggedIn(true);
+                setLoaded(true)
+
+                setDiffuserOrder(location.state.diffusers);
+                setOilOrder(location.state.oils);
+                setTotalAmt(location.state.total)
+
+            } else {
+                history.push('/login')
+
+            }
+        }
+        fetch()
+    }, [])
+    console.log("Diffusers order: ", diffuserOrder)
+    console.log("Oil orders: ", oilOrder)
 
     function displayConfirmItems() {
         let diffuserList = [];
-        for (let d of diffuserItems) {
+        for (let d of diffuserOrder) {
             diffuserList.push(
                 <Row className="mt-3 mb-3">
-                    <Col md={6} sm={6}>
+                    <Col md={4}>
                         <img src={d.diffusers.image_url} style={{ width: "175px", height: "197px" }} />
                     </Col>
-                    <Col sm={6}>
+                    <Col md={6}>
                         <p>Item: {d.diffusers.diffuser_name}</p>
                         <p>Qty: {d.quantity}</p>
-                        <p>Price: SGD {(formatPrice(d.diffusers.cost) * (d.quantity)).toFixed(2)}</p>
+                        <p>Price: {(formatPrice(d.diffusers.cost) * (d.quantity)).toFixed(2)} SGD</p>
                     </Col>
                 </Row>
             )
         }
         let oilList = [];
-        for (let e of oilItems) {
+        for (let e of oilOrder) {
             oilList.push(
                 <Row className="mt-3 mb-3">
-                    <Col md={4} sm={6}>
+                    <Col md={4}>
                         <img src={e.oils.image_url} style={{ width: "175px", height: "197px" }} />
                     </Col>
-                    <Col md={6} sm={6}>
+                    <Col md={6}>
                         <p>Item: {e.oils.name}</p>
                         <p>Qty: {e.quantity}</p>
-                        <p>Price: SGD {(formatPrice(e.oils.cost) * (e.quantity)).toFixed(2)}</p>
+                        <p>Price: {(formatPrice(e.oils.cost) * (e.quantity)).toFixed(2)} SGD</p>
                     </Col>
                 </Row>
             )
         }
         return { diffuserList, oilList };
-        // return diffuserList;
     }
 
     function formatPrice(price) {
@@ -67,30 +90,28 @@ export default function ConfirmOrder() {
 
     const submitOrder = async (e) => {
         // check if shipping fields are filled up 
+        // if yes, then display 'checkout btn' 
         if (shipOrderData.street_name !== '' &&
             shipOrderData.postal_code !== '' &&
             shipOrderData.unit_code !== '') {
             console.log("GOOD TO GO")
             setOrderFlag(true);
+            let postShipOrder = await axios.post(`${baseUrl}/api/checkout/${e.target.name}/latest/orders`, {
+                street_name: shipOrderData.street_name,
+                postal_code: shipOrderData.postal_code,
+                unit_code: shipOrderData.unit_code,
+                order_date: new Date(),
+                payment_status: 'unpaid',
+                order_status: 'pending',
+                payment_type: 'card',
+                amount: 0,
+                customer_id: parseInt(e.target.name)
+            });
+            console.log(postShipOrder.data);
+            if (postShipOrder.data.status == 200) {
+                alert('Successfully added shipping address')
+            }
         }
-
-
-
-        // let postShipOrder = await axios.post(`${baseUrl}/api/checkout/${e.target.name}/latest/orders`, {
-        //     street_name: shipOrderData.street_name,
-        //     postal_code: shipOrderData.postal_code,
-        //     unit_code: shipOrderData.unit_code,
-        //     order_date: new Date(),
-        //     payment_status: 'unpaid',
-        //     order_status: 'pending',
-        //     payment_type: 'card',
-        //     amount: 0,
-        //     customer_id: parseInt(e.target.name)
-        // });
-        // console.log(postShipOrder.data);
-        // if (postShipOrder.data.status==200) {
-        //     alert('Successfully added shipping address')
-        // }
     }
 
     return (
@@ -129,26 +150,24 @@ export default function ConfirmOrder() {
                 </div>
 
                 <div className="mt-4">
-                    <h3>Preview Order Items</h3>
                     <Row>
-                        <Col>
+                        <Col md={8}>
+                            <h3>Preview Order Items</h3>
                             {displayConfirmItems().diffuserList}
-                        </Col>
-                        <Col>
                             {displayConfirmItems().oilList}
                         </Col>
+                        <Col md={4}>
+                            <h3>Total Amount: {totalAmt} SGD</h3>
+                            <p>Need changes to shopping cart? <Link to="/profile/cart">Back to cart.</Link></p>
+                            {orderFlag ? <Button color="primary"
+                                name={localStorage.getItem('customer_id')}>Proceed to Checkout</Button> : null}
+                        </Col>
                     </Row>
-                    <div>
-                        {/* {displayConfirmItems()} */}
-                    </div>
                 </div>
-
-
-
-                <div >
+                {/* <div >
                     {orderFlag ? <Button color="primary"
                         name={localStorage.getItem('customer_id')}>Proceed to Checkout</Button> : null}
-                </div>
+                </div> */}
             </div>
 
 

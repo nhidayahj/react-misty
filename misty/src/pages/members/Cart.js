@@ -3,7 +3,7 @@ import axios from 'axios';
 import config from '../../config';
 import { useLocation, useHistory } from 'react-router-dom';
 import {
-    ListGroup, ListGroupItem, Button,
+    ListGroup, ListGroupItem, Button
 } from 'reactstrap';
 
 
@@ -18,8 +18,8 @@ export default function Cart() {
     const [diffuserItem, setDiffuser] = useState([]);
     const [oilItem, setOil] = useState([]);
     // const [cartItems, setCartItems] = useState({})
-    const [pageLoaded, isPageLoaded] = useState(false)
-    
+    const [pageLoaded, isPageLoaded] = useState(false);
+
 
 
     useEffect(() => {
@@ -58,8 +58,8 @@ export default function Cart() {
 
     const decrementDiffQty = (e) => {
         let itemIndex = diffuserItem.findIndex(d => d.diffusers.id === parseInt(e.target.name));
-        let cloned = [...diffuserItem]; 
-        if ((cloned[itemIndex]).quantity > 1){
+        let cloned = [...diffuserItem];
+        if ((cloned[itemIndex]).quantity > 1) {
             cloned[itemIndex].quantity -= 1;
         } else {
             // product qty is alr 1 
@@ -69,25 +69,27 @@ export default function Cart() {
 
     const updateDiffQty = async (e) => {
         let customer_id = localStorage.getItem('customer_id');
-        let updateQty = await axios.get(`${baseUrl}/diffuser/${customer_id}/${e.target.name}/update`);
-        if (updateQty.data.status == 200 ) {
-            return alert("Quantity updated")
-        } else {
-            return alert("Product is running low.")
+        let updateQty = await axios.get(`
+        ${baseUrl}/api/shoppingCart/diffuser/${customer_id}/${e.target.name}/${e.target.value}/update`);
+        if (updateQty.status === 200) {
+            console.log(updateQty.data);
+        }
+        if (updateQty.status === 404) {
+            console.log(updateQty.data)
         }
     }
 
     const incrementOilQty = (e) => {
         let itemIndex = oilItem.findIndex(i => i.oils.id === parseInt(e.target.name));
-        let cloned = [...oilItem]; 
+        let cloned = [...oilItem];
         cloned[itemIndex].quantity += 1;
         setOil(cloned);
     }
 
     const decrementOilQty = (e) => {
         let itemIndex = oilItem.findIndex(i => i.oils.id === parseInt(e.target.name));
-        let cloned = [...oilItem]; 
-        if ((cloned[itemIndex]).quantity > 1){
+        let cloned = [...oilItem];
+        if ((cloned[itemIndex]).quantity > 1) {
             cloned[itemIndex].quantity -= 1;
         } else {
             // product qty is alr 1 
@@ -97,8 +99,16 @@ export default function Cart() {
 
     const updateOilQty = async (e) => {
         let customer_id = localStorage.getItem('customer_id');
-        let updateQty = await axios.get(`${baseUrl}/oil/${customer_id}/${e.target.name}/update`);
+        let updateQty = await axios.get(`
+        ${baseUrl}/api/shoppingCart/oil/${customer_id}/${e.target.name}/${e.target.value}/update`);
+        if (updateQty.status === 200 ){
+            console.log(updateQty.data);
+        }
+        if(updateQty.status === 400) {
+            console.log(updateQty.data);
+        }
     }
+
 
     function displayDiffuserItems() {
         let diffuserCart = []
@@ -113,7 +123,7 @@ export default function Cart() {
                         <Button outline color="danger" size="sm" name={d.diffusers.id} onClick={decrementDiffQty} value={d.quantity}>-</Button>{' '}
                         <Button color="info" size="sm" name={d.diffusers.id} onClick={updateDiffQty} value={d.quantity}>Update</Button>
                     </ListGroupItem>
-                    <ListGroupItem id={d.diffuser_id} name={d.diffusers.id}>Price: SGD {(formatPrice(d.diffusers.cost) * (d.quantity)).toFixed(2)}</ListGroupItem>
+                    <ListGroupItem id={d.diffuser_id} name={d.diffusers.id}>Price: {(formatPrice(d.diffusers.cost) * (d.quantity)).toFixed(2)} SGD</ListGroupItem>
                 </ListGroup>
             );
         }
@@ -133,13 +143,28 @@ export default function Cart() {
                         <Button outline color="danger" size="sm" name={i.oils.id} onClick={decrementOilQty} value={i.quantity}>-</Button>{' '}
                         <Button color="info" size="sm" name={i.oils.id} onClick={updateOilQty} value={i.quantity}>Update</Button>
                     </ListGroupItem>
-                    <ListGroupItem id={i.oil_id}>Price: SGD {(formatPrice(i.oils.cost) * (i.quantity)).toFixed(2)}</ListGroupItem>
+                    <ListGroupItem id={i.oil_id}>Price: {(formatPrice(i.oils.cost) * (i.quantity)).toFixed(2)} SGD</ListGroupItem>
                 </ListGroup>
 
 
             );
         }
         return oilCart;
+    }
+
+    function displayFinalAmt() {
+        let amtDiff=parseFloat(0);
+        let amtOil=parseFloat(0);
+        if(pageLoaded === true) {
+            for (let d of diffuserItem) {
+                 amtDiff += ((d.quantity) * (d.diffusers.cost));
+            }
+
+            for (let e of oilItem) {
+               amtOil += ((e.quantity) * (e.oils.cost));
+            }
+            return formatPrice(amtDiff + amtOil);
+        }
     }
 
     function formatPrice(price) {
@@ -150,22 +175,28 @@ export default function Cart() {
     const confirmOrder = () => {
         // alert("Customer confirming order");
         history.push(`/shipping`, {
-            'diffusers':diffuserItem,
-            'oils':oilItem
+            'diffusers': diffuserItem,
+            'oils': oilItem,
+            'total':displayFinalAmt()
         });
     }
 
     return (
         <React.Fragment>
+            <div className="container">
+                <h4 className="mt-3">Diffuser Cart</h4>
+                {pageLoaded ? displayDiffuserItems() : null}
+               
+                <h4 className="mt-3">Essential Oil Cart</h4>
+                {pageLoaded ? displayOilItems() : null}
 
-            <h4 className="mt-3">Diffuser Cart</h4>
-            {pageLoaded ? displayDiffuserItems() : null}
-
-            <h4 className="mt-3">Essential Oil Cart</h4>
-            {pageLoaded ? displayOilItems() : null}
-
-            <div>
-                <Button outline color="info" onClick={confirmOrder}>Proceed to Checkout</Button>
+                <div>
+                    <h3>Total Amount: {displayFinalAmt()} SGD</h3>
+                    
+                </div>
+                <div>
+                    <Button className="mt-4 mb-4" outline color="info" onClick={confirmOrder}>Proceed to Checkout</Button>
+                </div>
             </div>
         </React.Fragment>
     )
