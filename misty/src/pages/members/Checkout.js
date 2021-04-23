@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
-import {Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 
 const baseUrl = config.baseUrl;
 
@@ -36,16 +36,18 @@ export default function Checkout() {
     }, []);
 
     useEffect(() => {
-        const fetch = async () => {
-            if (localStorage.getItem('customer_id') !== null) {
-                let response = await axios.get(`${baseUrl}/api/checkout/${localStorage.getItem('customer_id')}/latest/orders`);
-                if (response.status === 200) {
-                    setShipAdd(response.data)
-                    setCustInfo(response.data.customers);
+        setTimeout(() => {
+            const fetch = async () => {
+                if (localStorage.getItem('customer_id') !== null) {
+                    let response = await axios.get(`${baseUrl}/api/checkout/${localStorage.getItem('customer_id')}/latest/orders`);
+                    if (response.status === 200) {
+                        setShipAdd(response.data)
+                        setCustInfo(response.data.customers);
+                    }
                 }
             }
-        }
-        fetch()
+            fetch()
+        }, 1000)
     }, [])
 
     function displayShipOrder() {
@@ -65,7 +67,7 @@ export default function Checkout() {
                 diffuserList.push(
                     <Row className="mt-3 mb-3">
                         <Col md={4}>
-                            <img src={d.diffusers.image_url} style={{ width: "175px", height: "197px" }} />
+                            <img src={d.diffusers.image_url} style={{ width: "175px", height: "197px"}} alt="product img" />
                         </Col>
                         <Col md={6}>
                             <p>Item: {d.diffusers.diffuser_name}</p>
@@ -81,7 +83,7 @@ export default function Checkout() {
                 oilList.push(
                     <Row className="mt-3 mb-3">
                         <Col md={4}>
-                            <img src={e.oils.image_url} style={{ width: "175px", height: "197px" }} />
+                            <img src={e.oils.image_url} style={{ width: "175px", height: "197px"}} alt="product img" />
                         </Col>
                         <Col md={6}>
                             <p>Item: {e.oils.name}</p>

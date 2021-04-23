@@ -1,9 +1,10 @@
 // import logo from './logo.svg';
 import './App.css';
-import React from 'react'
+import React, {useEffect} from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import config from './config';
+import axios from 'axios';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
@@ -17,6 +18,17 @@ import Checkout from './pages/members/Checkout';
 
 
 function App() {
+    useEffect(() => {
+        setInterval(async () => {
+            const response = await axios.post(
+                config.baseUrl + "/api/members/refresh",
+                {
+                    refreshToken: localStorage.getItem("refreshToken")
+                }
+            );
+            localStorage.setItem("accessToken", response.data.accessToken);
+        }, config.REFRESH_TOKEN_INTERVAL);
+    });
     return (
         <Router>
 
@@ -58,7 +70,7 @@ function App() {
                 <li className="nav-item">
                     <Link className="nav-link" to="/profile/cart">Cart</Link>
                 </li>
-                
+
             </ul>
             <Switch>
                 <Route exact path='/about'>

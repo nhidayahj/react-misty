@@ -34,7 +34,7 @@ export default function MemberProfile() {
                     setProfile(customer.data);
                 }
                 fetch();
-            }, 500)
+            }, 1000)
 
         }
     }, [])
@@ -52,6 +52,15 @@ export default function MemberProfile() {
         if (updateInfo.status === 200) {
             console.log(updateInfo)
         }
+    }
+
+    const userLogout = async() => {
+        let logout = await axios.post(`${baseUrl}/api/members/logout`, {
+            refreshToken:localStorage.getItem('refreshToken')
+        })
+        localStorage.clear();
+        console.log(logout.data.message);
+        history.push('/');
     }
 
     const updateName = (e) => {
@@ -96,7 +105,7 @@ export default function MemberProfile() {
             <Button color="success" className="mt-3" onClick={goCart}>Shopping Cart</Button>
 
         </div>
-        <Button color="danger" size="sm" className="mt-3">Logout</Button>
+        <Button color="danger" size="sm" className="mt-3" onClick={userLogout}>Logout</Button>
 
     </React.Fragment>
 }

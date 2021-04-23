@@ -24,19 +24,21 @@ export default function Home() {
     // to search use useEffect
 
     useEffect(() => {
-        const fetch = async () => {
-            let diffusers = await axios.get(baseUrl + '/api/products/diffusers');
-            setDiffusers(diffusers.data);
+        setTimeout(() => {
+            const fetch = async () => {
+                let diffusers = await axios.get(baseUrl + '/api/products/diffusers');
+                setDiffusers(diffusers.data);
 
-            console.log("All diffusers: ", diffusers.data);
-            // console.log("All oils: ",oils.data);
+                console.log("All diffusers: ", diffusers.data);
+                // console.log("All oils: ",oils.data);
 
-            setLoaded(true);
-            if (localStorage.getItem('customer_id') !== null) {
-                setLoggedIn(true);
+                setLoaded(true);
+                if (localStorage.getItem('customer_id') !== null) {
+                    setLoggedIn(true);
+                }
             }
-        }
-        fetch();
+            fetch();
+        }, 1000)
     }, []);
 
     useEffect(() => {

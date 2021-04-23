@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { Button } from 'reactstrap'
@@ -22,20 +22,21 @@ export default function Login2() {
     }
 
     const loginUser = async () => {
-        const customer = await axios.post(baseUrl + '/api/members/login', {
-            'email': memberData.email,
-            'password': memberData.password,
-            
-
-        })
-        if (customer.status === 200) {
+        try {
+            const customer = await axios.post(baseUrl + '/api/members/login', {
+                'email': memberData.email,
+                'password': memberData.password,
+            })
             console.log(customer);
             localStorage.setItem('accessToken', customer.data.accessToken)
             localStorage.setItem('refreshToken', customer.data.refreshToken)
             localStorage.setItem('customer_id', customer.data.id);
             // window.location = ('/profile')
             history.push('/profile')
-        } 
+        }
+        catch (e) {
+            console.log(e)
+        }
 
     }
 

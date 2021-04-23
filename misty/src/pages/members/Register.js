@@ -23,8 +23,8 @@ export default function Register() {
             password: memberData.password,
             dob: memberData.dob,
             member_date: new Date()
-            
         })
+
         history.push('/new-member', {
             member:memberData
         })
@@ -58,7 +58,7 @@ export default function Register() {
                 </div>
                 <div className="form-group">
                     <label>Date of Birth</label>
-                    <input type="text" className="form-control"
+                    <input type="date" className="form-control"
                         name="dob" placeholder="YYYY-MM-DD"
                         value={memberData.dob} onChange={updateForm} />
                 </div>

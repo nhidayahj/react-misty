@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import config from '../../config';
-import { useLocation, useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {
     ListGroup, ListGroupItem, Button
 } from 'reactstrap';
 
-
-
 const baseUrl = config.baseUrl;
 
-
 export default function Cart() {
-    const customer_id = localStorage.getItem('customer_id')
+ 
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [customer, setCustomer] = useState('')
     const [diffuserItem, setDiffuser] = useState([]);
     const [oilItem, setOil] = useState([]);
-    // const [cartItems, setCartItems] = useState({})
     const [pageLoaded, isPageLoaded] = useState(false);
 
 
