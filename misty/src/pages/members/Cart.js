@@ -45,8 +45,8 @@ export default function Cart() {
         fetch();
     }, [customer])
 
-    console.log("Diffuser Items:", diffuserItem);
-    console.log("Oil Items:", oilItem);
+    // console.log("Diffuser Items:", diffuserItem);
+    // console.log("Oil Items:", oilItem);
 
     const incrementDiffQty = (e) => {
         let itemIndex = diffuserItem.findIndex(d => d.diffusers.id === parseInt(e.target.name));
@@ -123,7 +123,19 @@ export default function Cart() {
         }
     }
 
-    
+    const removeOil = async (e) => {
+        let customer_id = localStorage.getItem('customer_id');
+        let itemIndex = oilItem.findIndex(i => i.oils.id === parseInt(e.target.name));
+        let cloned = [...oilItem];
+        cloned.splice(cloned[itemIndex], 1);
+        setOil(cloned.splice(cloned[itemIndex], 1))
+        
+        let removeOil = await axios.get(`${baseUrl}/api/shoppingCart/oil/${customer_id}/${e.target.name}/remove`);
+        if (removeOil.status === 200) {
+            console.log(removeOil.data);
+            
+        }
+    }
 
     function displayDiffuserItems() {
         let diffuserCart = []
@@ -150,14 +162,15 @@ export default function Cart() {
         let oilCart = []
         for (let i of oilItem) {
             oilCart.push(
-                <ListGroup className="mt-3 mb-3">
+                <ListGroup className={"mt-3 mb-3" +" " + `${i.oils.id}`}>
                     <img src={i.oils.image_url} alt="product img" style={{ width: "175px", height: "197px" }} />
                     <ListGroupItem id={i.oil_id}>Item: {i.oils.name}</ListGroupItem>
                     <ListGroupItem id={i.oil_id}>
                         <p>Quantity: {i.quantity}</p>
                         <Button outline color="success" size="sm" name={i.oils.id} onClick={incrementOilQty} value={i.quantity}>+</Button>{' '}
                         <Button outline color="danger" size="sm" name={i.oils.id} onClick={decrementOilQty} value={i.quantity}>-</Button>{' '}
-                        <Button color="info" size="sm" name={i.oils.id} onClick={updateOilQty} value={i.quantity}>Update</Button>
+                        <Button color="info" size="sm" name={i.oils.id} onClick={updateOilQty} value={i.quantity}>Update</Button>{' '}
+                        <Button color="danger" size="sm" name={i.oils.id} onClick={removeOil}>Remove</Button>
                     </ListGroupItem>
                     <ListGroupItem id={i.oil_id}>Price: {(formatPrice(i.oils.cost) * (i.quantity)).toFixed(2)} SGD</ListGroupItem>
                 </ListGroup>

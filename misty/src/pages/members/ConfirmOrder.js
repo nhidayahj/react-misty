@@ -36,13 +36,12 @@ export default function ConfirmOrder() {
 
             } else {
                 history.push('/login')
-
             }
         }
         fetch()
     }, [])
-    console.log("Diffusers order: ", diffuserOrder)
-    console.log("Oil orders: ", oilOrder)
+    // console.log("Diffusers order: ", diffuserOrder)
+    // console.log("Oil orders: ", oilOrder)
 
     function displayConfirmItems() {
         let diffuserList = [];
@@ -124,7 +123,8 @@ export default function ConfirmOrder() {
                 history.push('/checkout', {
                     'orderDiffusers':response.data.diffusers,
                     'orderOils':response.data.oils,
-                    'total':totalAmt
+                    'total':totalAmt,
+
                 })
             }
         }
@@ -132,7 +132,7 @@ export default function ConfirmOrder() {
 
     return (
         <React.Fragment>
-            <div className="container">
+            <div className="container mt-3">
                 <h3>Shipping Details</h3>
                 <FormGroup>
                     <Label for="address">Address</Label>
@@ -162,10 +162,10 @@ export default function ConfirmOrder() {
                     </Col>
                 </Row>
                 <div>
-                    <Button onClick={submitOrder} name={localStorage.getItem('customer_id')}>Add Shipping</Button>
+                    <Button color="success" onClick={submitOrder} name={localStorage.getItem('customer_id')}>Add Shipping</Button>
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-5">
                     <Row>
                         <Col md={8}>
                             <h3>Preview Order Items</h3>
@@ -175,15 +175,12 @@ export default function ConfirmOrder() {
                         <Col md={4}>
                             <h3>Total Amount: {totalAmt} SGD</h3>
                             <p>Need changes to shopping cart? <Link to="/profile/cart">Back to cart.</Link></p>
-                            {orderFlag ? <Button color="primary"
+                            {orderFlag ? <Button color="primary" className="mt-4"
                                 name={localStorage.getItem('customer_id')} onClick={checkoutOrder}>Proceed to Checkout</Button> : null}
                         </Col>
                     </Row>
                 </div>
-                {/* <div >
-                    {orderFlag ? <Button color="primary"
-                        name={localStorage.getItem('customer_id')}>Proceed to Checkout</Button> : null}
-                </div> */}
+                
             </div>
 
 

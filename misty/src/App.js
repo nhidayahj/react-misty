@@ -50,6 +50,9 @@ function App() {
                     <Link className="nav-link" to="/login">Login</Link>
                 </li>
                 <li className="nav-item">
+                    <Link className="nav-link" to="/profile">Profile</Link>
+                </li>
+                <li className="nav-item">
                     <Link className="nav-link" to="/profile/logout">Logout</Link>
                 </li>
                 <li className="nav-item">

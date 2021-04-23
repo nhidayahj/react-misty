@@ -33,11 +33,8 @@ export default function Login2() {
             localStorage.setItem('accessToken', customer.data.accessToken)
             localStorage.setItem('refreshToken', customer.data.refreshToken)
             localStorage.setItem('customer_id', customer.data.id);
-            history.push('/profile', {
-                name:customer.data.name,
-                email:customer.data.email,
-                id:customer.data.id
-            })
+            // window.location = ('/profile')
+            history.push('/profile')
         } 
 
     }
