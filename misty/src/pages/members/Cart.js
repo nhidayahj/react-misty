@@ -79,6 +79,20 @@ export default function Cart() {
         }
     }
 
+    const removeDiff = async (e) => {
+        let customer_id = localStorage.getItem('customer_id');
+        let itemIndex = diffuserItem.findIndex(d => d.diffusers.id === parseInt(e.target.name));
+        let cloned = [...diffuserItem];
+        cloned.splice(cloned[itemIndex], 1);
+        setDiffuser(cloned.splice(cloned[itemIndex], 1))
+        
+        let removeDiff = await axios.get(`${baseUrl}/api/shoppingCart/diffuser/${customer_id}/${e.target.name}/remove`);
+        if (removeDiff.status === 200) {
+            console.log(removeDiff.data);
+            
+        }
+    }
+
     const incrementOilQty = (e) => {
         let itemIndex = oilItem.findIndex(i => i.oils.id === parseInt(e.target.name));
         let cloned = [...oilItem];
@@ -109,19 +123,21 @@ export default function Cart() {
         }
     }
 
+    
 
     function displayDiffuserItems() {
         let diffuserCart = []
         for (let d of diffuserItem) {
             diffuserCart.push(
-                <ListGroup className="mt-3 mb-3">
+                <ListGroup className={"mt-3 mb-3" +" " + `${d.diffusers.id}`} >
                     <img src={d.diffusers.image_url} style={{ width: "175px", height: "197px" }} name={d.diffusers.id} />
                     <ListGroupItem id={d.diffuser_id} name={d.diffusers.id}>Item: {d.diffusers.diffuser_name}</ListGroupItem>
                     <ListGroupItem id={d.diffuser_id}>
                         <p>Quantity: {d.quantity}{' '}</p>
                         <Button outline color="success" size="sm" name={d.diffusers.id} onClick={incrementDiffQty} value={d.quantity}>+</Button>{' '}
                         <Button outline color="danger" size="sm" name={d.diffusers.id} onClick={decrementDiffQty} value={d.quantity}>-</Button>{' '}
-                        <Button color="info" size="sm" name={d.diffusers.id} onClick={updateDiffQty} value={d.quantity}>Update</Button>
+                        <Button color="info" size="sm" name={d.diffusers.id} onClick={updateDiffQty} value={d.quantity}>Update</Button>{' '}
+                        <Button color="danger" size="sm" name={d.diffusers.id} onClick={removeDiff}>Remove</Button>
                     </ListGroupItem>
                     <ListGroupItem id={d.diffuser_id} name={d.diffusers.id}>Price: {(formatPrice(d.diffusers.cost) * (d.quantity)).toFixed(2)} SGD</ListGroupItem>
                 </ListGroup>
@@ -173,7 +189,6 @@ export default function Cart() {
 
     const history = useHistory();
     const confirmOrder = () => {
-        // alert("Customer confirming order");
         history.push(`/shipping`, {
             'diffusers': diffuserItem,
             'oils': oilItem,
