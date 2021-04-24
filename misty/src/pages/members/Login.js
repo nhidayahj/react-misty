@@ -6,7 +6,7 @@ import { Button } from 'reactstrap'
 
 const baseUrl = config.baseUrl;
 
-export default function Login2() {
+export default function Login() {
 
     const [memberData, setMember] = useState({
         'email': '',
@@ -22,40 +22,49 @@ export default function Login2() {
     }
 
     const loginUser = async () => {
-        try {
-            const customer = await axios.post(baseUrl + '/api/members/login', {
-                'email': memberData.email,
-                'password': memberData.password,
-            })
-            console.log(customer);
+        const customer = await axios.post(baseUrl + '/api/members/login', {
+            'email': memberData.email,
+            'password': memberData.password,
+        })
+        console.log(customer);
+        if (customer) {
             localStorage.setItem('accessToken', customer.data.accessToken)
             localStorage.setItem('refreshToken', customer.data.refreshToken)
             localStorage.setItem('customer_id', customer.data.id);
             // window.location = ('/profile')
             history.push('/profile')
         }
-        catch (e) {
-            console.log(e)
+        else if (!customer) {
+            console.log(customer);
+            invalidLogin();
         }
-
     }
 
-    return (
-        <React.Fragment>
-            <div className="container">
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" className="form-control"
-                        name="email" value={memberData.email} onChange={updateForm} />
-                </div>
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control"
-                        name="password" value={memberData.password} onChange={updateForm} />
-                </div>
-                <Button class="btn btn-primary mt-4" onClick={loginUser}>Login</Button>
-            </div>
 
-        </React.Fragment>
-    )
+function invalidLogin() {
+    return <React.Fragment>
+        <div className="alert alert-danger">
+            <p>Incorrect login credentials</p>
+        </div>
+    </React.Fragment>
+}
+
+return (
+    <React.Fragment>
+        <div className="container">
+            <div className="form-group">
+                <label>Email</label>
+                <input type="email" className="form-control"
+                    name="email" value={memberData.email} onChange={updateForm} />
+            </div>
+            <div className="form-group">
+                <label>Password</label>
+                <input type="password" className="form-control"
+                    name="password" value={memberData.password} onChange={updateForm} />
+            </div>
+            <Button class="btn btn-primary mt-4" onClick={loginUser}>Login</Button>
+        </div>
+
+    </React.Fragment>
+)
 }
