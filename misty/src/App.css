@@ -1,3 +1,15 @@
+
+#shop-logo{
+    display: block;
+    margin: 12px auto 12px auto;
+    width: 275px;
+     height:275px;
+}
+
+.MDBNavItem {
+    color:black;
+}
+
 .product-img {
     width:200px;
     height:370px;
@@ -14,18 +26,42 @@
 }
 
 p, .product-desc {
-    /* text-align: center; */
     height:5%;
     font-family: 'EB Garamond', serif;
     font-size: 18px;
-    /* padding:15px; */
+
     
 }
 
+.nav {
+    margin-top:18px;
+    background-color: rgb(255, 255, 255);
+   
+}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar-nav{
+    flex-direction: row;
+}
+
+.nav-item{
+    font-family: 'EB Garamond', serif;
+    font-size:32px;
+}
+
+
+@media screen and (max-width:426px) {
+    #shop-logo{
+         margin-left: auto; 
+    margin-right:auto;   
+        height:200px;
+        width:200px;
+    }
+}
+
+@media screen and (max-width:769px) {
+    .nav-item{
+        font-size: 22px;
+    }
 }
 
 @media (prefers-reduced-motion: no-preference) {

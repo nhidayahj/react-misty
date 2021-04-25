@@ -4,7 +4,7 @@ import axios from 'axios';
 import config from '../config';
 import {
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
+    CardTitle, CardSubtitle, Button, 
 } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 
@@ -25,7 +25,9 @@ export default function Home() {
 
     // const [searchDiffName, setDiffName] = useState('');
     const [searchCategory, setCategory] = useState('');
+    const [searchPriceRange, setPrice] = useState('');
     const [categoryInfo, setCategoryInfo] = useState('');
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -54,12 +56,12 @@ export default function Home() {
         fetch()
     }, [])
 
-    // search products 
+    // search products by categories
     useEffect(() => {
 
         const fetch = async () => {
             let category = searchCategory;
-            if(category !== '0') {
+            if (category !== '0') {
                 const response = await axios.get(`${baseUrl}/api/products/diffuser/category/${category}`);
                 console.log(response.data);
                 setDiffusers(response.data);
@@ -72,6 +74,27 @@ export default function Home() {
         fetch();
 
     }, [searchCategory])
+
+    // search products by price range
+    useEffect(() => {
+        // let range = searchPriceRange;
+        const fetch = async () => {
+            if (searchPriceRange === '3499' || searchPriceRange === '6500') {
+                const responseLow = await axios.get(`${baseUrl}/api/products/diffuser/low/${searchPriceRange}`);
+                console.log("Low: ", responseLow.data);
+                setDiffusers(responseLow.data);
+
+            } else if (searchPriceRange === '6501' || searchPriceRange === '10000') {
+                const responseMid = await axios.get(`${baseUrl}/api/products/diffuser/mid/${searchPriceRange}`);
+                console.log("Mid: ", responseMid.data);
+                setDiffusers(responseMid.data);
+            } else if (searchPriceRange === '0') {
+                const response = await axios.get(`${baseUrl}/api/products/diffusers`);
+                setDiffusers(response.data);
+            }
+        }
+        fetch()
+    }, [searchPriceRange])
 
     const diffAddToCart = async (e) => {
         if (isLoggedIn === true && isLoaded === true) {
@@ -103,11 +126,13 @@ export default function Home() {
     }
 
     const displayDiffusers = () => {
-        if (diffusers.length > 1) {
+        if (diffusers && diffusers.length >= 1) {
             let products = [];
+
             for (let diffuser of diffusers) {
                 products.push(
                     <React.Fragment>
+
                         <div className="col-lg-4 col-md-6">
                             <Card className="product-card">
                                 <CardImg className="product-img" src={diffuser.image_url} alt="Card image cap" />
@@ -116,10 +141,12 @@ export default function Home() {
                                     <CardSubtitle tag="h6" className="mb-2 text-muted">{diffuser.category.name}</CardSubtitle>
                                     <CardText className="product-desc">{diffuser.description}</CardText>
                                     <CardSubtitle tag="h6" className="mb-2 text-muted">{formatPrice(diffuser.cost)} SGD </CardSubtitle>
-                                    <Button color="warning" className="mr-3 product-view mt-2">View</Button>
+                                    <Button color="warning" className="mr-3 product-view mt-2"
+                                        name={diffuser.id} >View</Button>
 
-                                    <Button color="info add-to-cart" name={diffuser.id} onClick={diffAddToCart} 
-                                    className="product-view mt-2" >Add to Cart</Button>
+
+                                    <Button color="info add-to-cart" name={diffuser.id} onClick={diffAddToCart}
+                                        className="product-view mt-2" >Add to Cart</Button>
                                 </CardBody>
                             </Card>
                         </div>
@@ -128,7 +155,7 @@ export default function Home() {
             }
             return products;
         } else if (diffusers && categoryInfo) {
-            console.log("FOUND PLS DISPLAY")
+
             return (
                 <React.Fragment>
                     <div className="col-lg-4 col-md-6">
@@ -142,23 +169,24 @@ export default function Home() {
                                 <Button color="warning" className="mr-3 mt-2 product-view">View</Button>
 
                                 <Button color="info add-to-cart" name={diffusers.id} onClick={diffAddToCart}
-                                className="mt-2 product-view">Add to Cart</Button>
+                                    className="mt-2 product-view">Add to Cart</Button>
                             </CardBody>
                         </Card>
                     </div>
                 </React.Fragment>
             )
         } else if (!diffusers && !categoryInfo) {
-            console.log("NO SUCH PRODUCTS")
             return (
                 <React.Fragment>
                     <div className="container alert alert-danger">
-                       <p>Product not found</p>
+                        <p>Product not found</p>
                     </div>
                 </React.Fragment>
             )
         }
     }
+
+
 
     const displayOils = () => {
         let products = [];
@@ -193,19 +221,16 @@ export default function Home() {
             <div className="container">
 
                 <h3>Search Item</h3>
-                <div className="form-group">
-                    <label>Search by Product Name</label>
-                    <input type="text" className="form-control"
-                        name="name" />
-                </div>
+
                 <div className="form-group">
                     <label>Price Range</label>
-                    <select className="form-control">
-                        <option> -</option>
-                        <option> Less than 35 SGD</option>
-                        <option>35 - 65</option>
-                        <option>> 65</option>
-                        <option>> 100</option>
+                    <select className="form-control" name={searchPriceRange}
+                        onChange={e => { setPrice(e.target.value) }}>
+                        <option value="0">All</option>
+                        <option value="3499"> Less than 35 SGD</option>
+                        <option value="6500">35 - 65</option>
+                        <option value="6501">> 65 SGD</option>
+                        <option value="10000">> 100 SGD</option>
                     </select>
                 </div>
 
@@ -221,27 +246,17 @@ export default function Home() {
                         <option value="5">Electric</option>
                     </select>
                 </div>
-                <div className="form-group">
-                    <label>Search by Tags</label>
-                    <select className="form-control" >
-                        <option>Easy Maintenance</option>
-                        <option>good in small spaces</option>
-                        <option>safety verified</option>
-                        <option>Easy to clean</option>
-                    </select>
-                </div>
-                <div>
-                    <input type="button" className="btn btn-primary btn-sm mt-4 mb-4"
-                        value="search" />
-                </div>
+
 
                 <h3>Products</h3>
                 <div className="row">
+
                     {displayDiffusers()}
+
                 </div>
-                <div className="row">
+                {/* <div className="row">
                     {displayOils()}
-                </div>
+                </div> */}
             </div>
         </React.Fragment>
     )
