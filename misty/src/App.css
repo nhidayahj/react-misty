@@ -249,7 +249,7 @@ hr.divider {
     border:1px solid gray;
     width:90%;
     height:35vh;
-    background-color: rgb(219, 156, 111);
+    /* background-color: rgb(219, 156, 111); */
     position:relative;
 }
 
@@ -276,6 +276,29 @@ hr.divider {
     height:100%;
     object-fit: cover;
     margin-bottom:3px;
+}
+
+.info-desc-one, .info-desc-three{
+    position:absolute;
+    right:0;
+    /* border: 1px solid red; */
+    width:55%;
+    height:35vh;
+    /* background-color: rgb(124, 223, 141); */
+    padding:12px;
+}
+
+.info-desc-two{
+    position:absolute;
+    left:0;
+    width:55%;
+    height:35vh;
+    
+    padding:12px;
+}
+
+.info-text {
+    text-align: center;
 }
 
 
@@ -320,10 +343,7 @@ hr.divider {
     .checkout-img{
         margin-left:20vw;
     }
-    /* .info-one, .info-two, .info-three {
-        display:block;
-        ;
-    } */
+    
 }
 
 

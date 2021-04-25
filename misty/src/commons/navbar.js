@@ -41,15 +41,11 @@ const NavBar = (props) => {
             <Collapse isOpen={isOpen} navbar>
               <Nav className="mr-auto" navbar>
                 <NavItem>
-                <Link to="/about">
+                <Link to="/">
                   <NavLink>Who Are We</NavLink>
                   </Link>
                 </NavItem>
-                <Link to="/contact">
-                <NavItem>
-                  <NavLink>Contact Us</NavLink>
-                </NavItem>
-                </Link>
+                
                 
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
@@ -111,16 +107,12 @@ const NavBar = (props) => {
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>
               <Nav className="mr-auto" navbar>
-                <Link to="/about">
+                <Link to="/">
                 <NavItem>
                   <NavLink>Who Are We</NavLink>
                 </NavItem>
                 </Link>
-                <Link to="/contact">
-                <NavItem>
-                  <NavLink>Contact Us</NavLink>
-                </NavItem>
-                </Link>
+                
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
                     Catalog

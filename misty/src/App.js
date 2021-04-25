@@ -47,12 +47,10 @@ function App() {
                         <img src={misty} alt="shop-brand" id="shop-logo" />
                     </div>
                 <Switch>
-                    <Route exact path='/about'>
+                    <Route exact path='/'>
                         <AboutUs />
                     </Route>
-                    <Route exact path='/contact'>
-                        <ContactUs />
-                    </Route>
+                    
                     <Route exact path='/diffusers'>
                         <Diffusers />
                     </Route>
