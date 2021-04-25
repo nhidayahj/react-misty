@@ -39,7 +39,7 @@
     position:absolute;
     width:310px;
     height:240px;
-    background-color:green;
+    background-color:gray;
 }
 
 .product-img {
@@ -80,6 +80,14 @@
     letter-spacing: 1px;
 }
 
+Button.product-cart-btn {
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 2px;
+    font-weight:bold;
+    color:black;
+    background-color: rgb(156, 196, 162);
+}
+
 p {
     text-align: center;
     font-family: 'EB Garamond', serif;
@@ -87,8 +95,64 @@ p {
     letter-spacing: 1px;  
 }
 
+.cart-item-name {
+    font-family: 'EB Garamond', serif;
+    font-size:28px;
+    letter-spacing: 1px;
+}
 
-.nav-item{
+Button.cart-update {
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 2px;
+    font-weight:bold;
+    color:black;
+    background-color: rgb(201, 124, 231);
+   
+}
+
+Button.cart-remove {
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 2px;
+    font-weight:bold;
+    color:black;
+    background-color: rgb(240, 117, 117);
+}
+
+.product-total {
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 1px;
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.checkout-total {
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.checkout-amt-text{
+    font-size:28px;
+    font-weight: bolder;
+}
+
+Button.confirm-btn{
+    background-color:rgb(166, 233, 177);
+    font-size: 18px;
+    font-weight: bolder;
+    padding:10px 15px; 
+    color:black;
+    letter-spacing: 2px;
+}
+
+a.checkout-btn {
+    background-color:rgb(124, 223, 141);
+    font-size: 18px;
+    font-weight: bolder;
+    padding:10px 15px;
+}
+
+.nav-item, .cart-qty, .cart-price{
     font-family: 'EB Garamond', serif;
     font-size:22px;
 }
@@ -115,7 +179,10 @@ p {
    margin-left:8px; 
 }
 
-
+.ship-btn {
+    font-family: 'EB Garamond', serif;
+   letter-spacing: 2px;
+}
 
 
 .profile-box {
@@ -128,21 +195,31 @@ p {
     text-align: center;
     font-family: 'EB Garamond', serif;
     font-weight: bold;
+    font-size:32px;
     
 }
 
-.register-btn  {
+Button.register-btn  {
     width:100%;
-    padding:12px;
-    font-size:18px;
-    font-family: 'EB Garamond', serif;
-}
-
-.login-btn {
-    width:100%;
+    letter-spacing: 2px;
     padding:12px;
     font-size:22px;
     font-family: 'EB Garamond', serif;
+    background-color: royalblue;
+}
+
+Button.login-btn {
+    width:100%;
+    padding:12px;
+    font-size:22px;
+    letter-spacing: 2px;
+    font-family: 'EB Garamond', serif;
+    background-color: royalblue;
+}
+
+hr.divider {
+ border:3px solid gray;
+ border-radius: 2rem;
 }
 
 
@@ -161,6 +238,9 @@ p {
     .product-img {
         position: absolute;
         width:90vw;
+    } 
+    .cart-item-name {
+        font-size: 22px;
     }
 
 } 
@@ -172,6 +252,18 @@ p {
         height:200px;
         width:200px;
     }
+    .cart-item-name{
+        text-align: center;
+    }
+    .cart-item-img {
+     display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+    .checkout-img{
+        margin-left:20vw;
+    }
 }
 
 
@@ -180,6 +272,11 @@ p {
     .nav-item{
         font-size: 22px;
     }
+    .cart-img-review{
+        margin-left:20vw;
+        
+    }
+       
 }
 
 @media (prefers-reduced-motion: no-preference) {

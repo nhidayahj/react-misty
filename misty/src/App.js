@@ -16,11 +16,14 @@ import ContactUs from './pages/ContactUs';
 import Register from './pages/members/Register';
 import NewMembers from './pages/members/NewMembers';
 import Login from './pages/members/Login';
+import Logout from './pages/members/Logout';
 import Profile from './pages/members/Profile';
 import Cart from './pages/members/Cart';
 import ConfirmOrder from './pages/members/ConfirmOrder';
 import Checkout from './pages/members/Checkout';
 import NavBar from './commons/navbar'
+import Error from './commons/error'
+import ErrorLogin from './commons/error-login'
 
 
 
@@ -76,6 +79,15 @@ function App() {
                     </Route>
                     <Route exact path='/checkout'>
                         <Checkout />
+                    </Route>
+                    <Route exact path='/logout'>
+                        <Logout />
+                    </Route>
+                    <Route exact path='/error'>
+                        <Error />
+                    </Route>
+                    <Route exact path='/error-login'>
+                        <ErrorLogin />
                     </Route>
 
                 </Switch>

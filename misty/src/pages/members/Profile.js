@@ -23,6 +23,7 @@ export default function MemberProfile() {
 
     useEffect(() => {
         if (localStorage.getItem('customer_id') !== null) {
+            setLoggedIn(true);
             setTimeout(() => {
                 const fetch = async () => {
                     const customer = await axios.get(baseUrl + '/api/members/profile', {
@@ -60,7 +61,7 @@ export default function MemberProfile() {
         })
         localStorage.clear();
         console.log(logout.data.message);
-        history.push('/');
+        history.push('/logout');
     }
 
     const updateName = (e) => {
@@ -84,7 +85,7 @@ export default function MemberProfile() {
     return <React.Fragment>
         
         <div className="container">
-            <h3>User Profile</h3>
+            <h3 className="product-headers mt-3">User Account</h3>
             <div className="form-group">
                 <label>Full Name</label>
                 <input type="text" className="form-control"

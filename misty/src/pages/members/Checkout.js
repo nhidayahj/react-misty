@@ -53,9 +53,10 @@ export default function Checkout() {
     function displayShipOrder() {
         return (
             <React.Fragment>
-                <h5>Name: {custInfo.name}</h5>
-                <h5>Shipping Address: {custShipAdd.street_name}, S({custShipAdd.postal_code}) #{custShipAdd.unit_code}</h5>
-                <h5>Contact Number: {custInfo.mobile_no}</h5>
+                <p>Name: {custInfo.name}</p>
+                <p>Shipping Address: {custShipAdd.street_name}, S({custShipAdd.postal_code}) #{custShipAdd.unit_code}</p>
+                <p>Contact Number: {custInfo.mobile_no}</p>
+                <hr className="divider"></hr>
             </React.Fragment>
         )
     }
@@ -67,12 +68,16 @@ export default function Checkout() {
                 diffuserList.push(
                     <Row className="mt-3 mb-3">
                         <Col md={4}>
-                            <img src={d.diffusers.image_url} style={{ width: "175px", height: "197px"}} alt="product img" />
+                            <img src={d.diffusers.image_url} className="checkout-img"
+                                style={{ width: "175px", height: "197px" }} alt="product img" />
                         </Col>
                         <Col md={6}>
-                            <p>Item: {d.diffusers.diffuser_name}</p>
-                            <p>Qty: {d.quantity}</p>
-                            <p>Price: {(formatPrice(d.diffusers.cost) * (d.quantity)).toFixed(2)} SGD</p>
+                            <div className="mt-3">
+                                <p>Item: {d.diffusers.diffuser_name}</p>
+                                <p>Qty: {d.quantity}</p>
+                                <p>Price: {(formatPrice(d.diffusers.cost) * (d.quantity)).toFixed(2)} SGD</p>
+                            </div>
+
                         </Col>
                     </Row>
                 )
@@ -83,12 +88,15 @@ export default function Checkout() {
                 oilList.push(
                     <Row className="mt-3 mb-3">
                         <Col md={4}>
-                            <img src={e.oils.image_url} style={{ width: "175px", height: "197px"}} alt="product img" />
+                            <img src={e.oils.image_url} className="checkout-img"
+                                style={{ width: "175px", height: "197px" }} alt="product img" />
                         </Col>
                         <Col md={6}>
-                            <p>Item: {e.oils.name}</p>
-                            <p>Qty: {e.quantity}</p>
-                            <p>Price: {(formatPrice(e.oils.cost) * (e.quantity)).toFixed(2)} SGD</p>
+                            <div className="mt-3">
+                                <p>Item: {e.oils.name}</p>
+                                <p>Qty: {e.quantity}</p>
+                                <p>Price: {(formatPrice(e.oils.cost) * (e.quantity)).toFixed(2)} SGD</p>
+                            </div>
                         </Col>
                     </Row>
                 )
@@ -105,22 +113,21 @@ export default function Checkout() {
         <React.Fragment>
             <div className="container">
 
-                <h3>Shipping Details</h3>
-                <div className="mt-3 mb-4">
+                <h3 className="product-headers mt-4 mb-4">Confirm Shipping Details</h3>
+                <div className="mt-4 mb-4">
                     {displayShipOrder()}
                 </div>
                 <div>
                     {displayOrder().diffuserList}
                     {displayOrder().oilList}
                 </div>
-                <div className='mt-4 mb-3'>
-                    <h4>Total Amount: {totalAmt} SGD</h4>
-                </div>
-
+                <hr className="divider"></hr>
+                <div className='mb-3 checkout-total'>
+                    <h4 className="checkout-amt-text">Total Amount: {totalAmt} SGD</h4>
                 <a href=
                     {"https://3001-emerald-herring-pjfc5f72.ws-us03.gitpod.io/api/checkout/" + localStorage.getItem('customer_id') + "/confirm"}
-                    className="btn btn-primary mt-4 mb-4">Payment</a>
-
+                    className="btn mt-4 mb-4 checkout-btn">Payment</a>
+                </div>
             </div>
         </React.Fragment>
     )

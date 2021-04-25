@@ -49,9 +49,10 @@ export default function ConfirmOrder() {
             diffuserList.push(
                 <Row className="mt-3 mb-3">
                     <Col md={4}>
-                        <img src={d.diffusers.image_url} style={{ width: "175px", height: "197px" }} />
+                        <img src={d.diffusers.image_url} className="cart-img-review"
+                        style={{ width: "175px", height: "197px" }} />
                     </Col>
-                    <Col md={6}>
+                    <Col lg={4}>
                         <p>Item: {d.diffusers.diffuser_name}</p>
                         <p>Qty: {d.quantity}</p>
                         <p>Price: {(formatPrice(d.diffusers.cost) * (d.quantity)).toFixed(2)} SGD</p>
@@ -64,9 +65,10 @@ export default function ConfirmOrder() {
             oilList.push(
                 <Row className="mt-3 mb-3">
                     <Col md={4}>
-                        <img src={e.oils.image_url} style={{ width: "175px", height: "197px" }} />
+                        <img src={e.oils.image_url} className="cart-img-review"
+                        style={{ width: "175px", height: "197px" }} />
                     </Col>
-                    <Col md={6}>
+                    <Col lg={4}>
                         <p>Item: {e.oils.name}</p>
                         <p>Qty: {e.quantity}</p>
                         <p>Price: {(formatPrice(e.oils.cost) * (e.quantity)).toFixed(2)} SGD</p>
@@ -132,8 +134,8 @@ export default function ConfirmOrder() {
 
     return (
         <React.Fragment>
-            <div className="container mt-3">
-                <h3>Shipping Details</h3>
+            <div className="container">
+                <h3 className="product-headers mt-4">Shipping Details</h3>
                 <FormGroup>
                     <Label for="address">Address</Label>
                     <Input type="text" value={shipOrderData.street_name}
@@ -161,22 +163,24 @@ export default function ConfirmOrder() {
                         </FormGroup>
                     </Col>
                 </Row>
-                <div>
-                    <Button color="success" onClick={submitOrder} name={localStorage.getItem('customer_id')}>Add Shipping</Button>
+                <div className="ship-btn">
+                    <Button onClick={submitOrder} className="confirm-btn"
+                    name={localStorage.getItem('customer_id')}>Add Shipping</Button>
                 </div>
 
                 <div className="mt-5">
                     <Row>
                         <Col md={8}>
-                            <h3>Preview Order Items</h3>
+                            <h3 className="product-headers mb-4">Preview Order Items</h3>
                             {displayConfirmItems().diffuserList}
                             {displayConfirmItems().oilList}
                         </Col>
                         <Col md={4}>
-                            <h3>Total Amount: {totalAmt} SGD</h3>
+                            <h3 className="product-total">Total Amount: {totalAmt} SGD</h3>
                             <p>Need changes to shopping cart? <Link to="/profile/cart">Back to cart.</Link></p>
-                            {orderFlag ? <Button color="primary" className="mt-4"
-                                name={localStorage.getItem('customer_id')} onClick={checkoutOrder}>Proceed to Checkout</Button> : null}
+                            {orderFlag ? <Button className="confirm-btn" className="mt-4"
+                                name={localStorage.getItem('customer_id')} 
+                                onClick={checkoutOrder}>Proceed to Checkout</Button> : null}
                         </Col>
                     </Row>
                 </div>

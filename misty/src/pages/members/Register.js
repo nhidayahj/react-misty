@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import config from '../../config'
 import axios from 'axios';
+import { Button } from 'reactstrap';
 
 export default function Register() {
 
@@ -16,18 +17,22 @@ export default function Register() {
     const history = useHistory();
 
     const submitRegistration = async () => {
-        const response = await axios.post(config.baseUrl + '/api/members/register', {
-            name: memberData.fullname,
-            email: memberData.email,
-            mobile_no: memberData.contact,
-            password: memberData.password,
-            dob: memberData.dob,
-            member_date: new Date()
-        })
+        try {
+            const response = await axios.post(config.baseUrl + '/api/members/register', {
+                name: memberData.fullname,
+                email: memberData.email,
+                mobile_no: memberData.contact,
+                password: memberData.password,
+                dob: memberData.dob,
+                member_date: new Date()
+            })
+            history.push('/new-member', {
+                member: memberData
+            })
+        } catch (e) {
+            history.push('/error')
+        }
 
-        history.push('/new-member', {
-            member: memberData
-        })
     }
 
     const updateForm = (e) => {
@@ -69,8 +74,8 @@ export default function Register() {
                             name="password" value={memberData.password} onChange={updateForm} />
                     </div>
                     <div>
-                        <button className="btn btn-success mt-4 mb-4 register-btn" 
-                        onClick={submitRegistration}>Register</button>
+                        <Button className="mt-4 mb-4 register-btn"
+                            onClick={submitRegistration}>Register</Button>
                     </div>
                 </div>
             </div>

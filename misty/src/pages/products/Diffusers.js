@@ -8,6 +8,8 @@ import {
 } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 
+import cart from '../../icons/cart.png';
+
 const baseUrl = config.baseUrl
 
 export default function Diffusers() {
@@ -117,7 +119,8 @@ export default function Diffusers() {
                                     <Badge pill className="product-cat">{diffuser.category.name}</Badge>
                                     <div className="product-desc">{diffuser.description}</div>
                                     <div className="product-price">{formatPrice(diffuser.cost)} SGD</div>
-                                    <button className="btn btn-outline-secondary product-cart-btn">Cart</button>
+                                    <Button className="product-cart-btn"
+                                        onClick={diffAddToCart}><span><img src={cart} alt="cart-icon"/></span></Button>
 
                                 </div>
                             </div>
@@ -126,7 +129,7 @@ export default function Diffusers() {
                 )
             }
             return products;
-        } 
+        }
         // else if (diffusers && categoryInfo) {
         //     return (
         //         <React.Fragment>
@@ -148,7 +151,7 @@ export default function Diffusers() {
         //         </React.Fragment>
         //     )
         // } 
-        else if (diffusers.length <1) {
+        else if (diffusers.length < 1) {
             return (
                 <React.Fragment>
                     <div className="container alert alert-danger">

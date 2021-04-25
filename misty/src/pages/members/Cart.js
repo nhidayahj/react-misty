@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import config from '../../config';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
     ListGroup, ListGroupItem, Button
 } from 'reactstrap';
@@ -9,7 +9,7 @@ import {
 const baseUrl = config.baseUrl;
 
 export default function Cart() {
- 
+
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [customer, setCustomer] = useState('')
     const [diffuserItem, setDiffuser] = useState([]);
@@ -81,11 +81,11 @@ export default function Cart() {
         let cloned = [...diffuserItem];
         cloned.splice(cloned[itemIndex], 1);
         setDiffuser(cloned.splice(cloned[itemIndex], 1))
-        
+
         let removeDiff = await axios.get(`${baseUrl}/api/shoppingCart/diffuser/${customer_id}/${e.target.name}/remove`);
         if (removeDiff.status === 200) {
             console.log(removeDiff.data);
-            
+
         }
     }
 
@@ -111,10 +111,10 @@ export default function Cart() {
         let customer_id = localStorage.getItem('customer_id');
         let updateQty = await axios.get(`
         ${baseUrl}/api/shoppingCart/oil/${customer_id}/${e.target.name}/${e.target.value}/update`);
-        if (updateQty.status === 200 ){
+        if (updateQty.status === 200) {
             console.log(updateQty.data);
         }
-        if(updateQty.status === 400) {
+        if (updateQty.status === 400) {
             console.log(updateQty.data);
         }
     }
@@ -125,30 +125,43 @@ export default function Cart() {
         let cloned = [...oilItem];
         cloned.splice(cloned[itemIndex], 1);
         setOil(cloned.splice(cloned[itemIndex], 1))
-        
+
         let removeOil = await axios.get(`${baseUrl}/api/shoppingCart/oil/${customer_id}/${e.target.name}/remove`);
         if (removeOil.status === 200) {
             console.log(removeOil.data);
-            
+
         }
     }
 
     function displayDiffuserItems() {
         let diffuserCart = []
         for (let d of diffuserItem) {
+
             diffuserCart.push(
-                <ListGroup className={"mt-3 mb-3" +" " + `${d.diffusers.id}`} >
-                    <img src={d.diffusers.image_url} style={{ width: "175px", height: "197px" }} name={d.diffusers.id} />
-                    <ListGroupItem id={d.diffuser_id} name={d.diffusers.id}>Item: {d.diffusers.diffuser_name}</ListGroupItem>
-                    <ListGroupItem id={d.diffuser_id}>
-                        <p>Quantity: {d.quantity}{' '}</p>
-                        <Button outline color="success" size="sm" name={d.diffusers.id} onClick={incrementDiffQty} value={d.quantity}>+</Button>{' '}
-                        <Button outline color="danger" size="sm" name={d.diffusers.id} onClick={decrementDiffQty} value={d.quantity}>-</Button>{' '}
-                        <Button color="info" size="sm" name={d.diffusers.id} onClick={updateDiffQty} value={d.quantity}>Update</Button>{' '}
-                        <Button color="danger" size="sm" name={d.diffusers.id} onClick={removeDiff}>Remove</Button>
-                    </ListGroupItem>
-                    <ListGroupItem id={d.diffuser_id} name={d.diffusers.id}>Price: {(formatPrice(d.diffusers.cost) * (d.quantity)).toFixed(2)} SGD</ListGroupItem>
-                </ListGroup>
+                <React.Fragment>
+                   
+                    <div className="container mt-3 mb-3">
+                        <ListGroup className={`${d.diffusers.id}`} >
+                            <img src={d.diffusers.image_url} className="cart-item-img"
+                                style={{ width: "175px", height: "197px" }} name={d.diffusers.id} />
+                            <ListGroupItem className="cart-item-name mt-3" id={d.diffuser_id} name={d.diffusers.id}>
+                                Item: {d.diffusers.diffuser_name}</ListGroupItem>
+                            <ListGroupItem id={d.diffuser_id}>
+                                <div className="cart-qty">Quantity: {d.quantity}{' '}
+                                </div>
+                                <div className="cart-actions mt-3">
+                                    <Button outline color="success" size="sm" name={d.diffusers.id} onClick={incrementDiffQty} value={d.quantity}>+</Button>{' '}
+                                    
+                                    <Button outline color="danger" size="sm" name={d.diffusers.id} onClick={decrementDiffQty} value={d.quantity}>-</Button>{' '}
+                                    <Button className="cart-update" size="sm" name={d.diffusers.id} onClick={updateDiffQty} value={d.quantity}>Update</Button>{' '}
+                                    <Button className="cart-remove"color="danger" size="sm" name={d.diffusers.id} onClick={removeDiff}>Remove</Button>
+                                </div>
+                            </ListGroupItem>
+                            <ListGroupItem id={d.diffuser_id} className="cart-price"
+                            name={d.diffusers.id}>Price: {(formatPrice(d.diffusers.cost) * (d.quantity)).toFixed(2)} SGD</ListGroupItem>
+                        </ListGroup>
+                    </div>
+                </React.Fragment>
             );
         }
         return diffuserCart;
@@ -158,17 +171,22 @@ export default function Cart() {
         let oilCart = []
         for (let i of oilItem) {
             oilCart.push(
-                <ListGroup className={"mt-3 mb-3" +" " + `${i.oils.id}`}>
-                    <img src={i.oils.image_url} alt="product img" style={{ width: "175px", height: "197px" }} />
-                    <ListGroupItem id={i.oil_id}>Item: {i.oils.name}</ListGroupItem>
+                <ListGroup className={"mt-3 mb-3" + " " + `${i.oils.id}`}>
+                    <img src={i.oils.image_url} alt="product img"
+                        className="cart-item-img" style={{ width: "175px", height: "197px" }} />
+                    <ListGroupItem className="cart-item-name mt-3" id={i.oil_id}>
+                        Item: {i.oils.name}</ListGroupItem>
                     <ListGroupItem id={i.oil_id}>
-                        <p>Quantity: {i.quantity}</p>
-                        <Button outline color="success" size="sm" name={i.oils.id} onClick={incrementOilQty} value={i.quantity}>+</Button>{' '}
-                        <Button outline color="danger" size="sm" name={i.oils.id} onClick={decrementOilQty} value={i.quantity}>-</Button>{' '}
-                        <Button color="info" size="sm" name={i.oils.id} onClick={updateOilQty} value={i.quantity}>Update</Button>{' '}
-                        <Button color="danger" size="sm" name={i.oils.id} onClick={removeOil}>Remove</Button>
+                        <div className="cart-qty">Quantity: {i.quantity}</div>
+                        <div className="mt-3">
+                            <Button outline color="success" size="sm" name={i.oils.id} onClick={incrementOilQty} value={i.quantity}>+</Button>{' '}
+                            <Button outline color="danger" size="sm" name={i.oils.id} onClick={decrementOilQty} value={i.quantity}>-</Button>{' '}
+                            <Button className="cart-update"  size="sm" name={i.oils.id} onClick={updateOilQty} value={i.quantity}>Update</Button>{' '}
+                            <Button className="cart-remove"  size="sm" name={i.oils.id} onClick={removeOil}>Remove</Button>
+                        </div>
                     </ListGroupItem>
-                    <ListGroupItem id={i.oil_id}>Price: {(formatPrice(i.oils.cost) * (i.quantity)).toFixed(2)} SGD</ListGroupItem>
+                    <ListGroupItem className="cart-price"
+                    id={i.oil_id}>Price: {(formatPrice(i.oils.cost) * (i.quantity)).toFixed(2)} SGD</ListGroupItem>
                 </ListGroup>
 
 
@@ -178,15 +196,15 @@ export default function Cart() {
     }
 
     function displayFinalAmt() {
-        let amtDiff=parseFloat(0);
-        let amtOil=parseFloat(0);
-        if(pageLoaded === true) {
+        let amtDiff = parseFloat(0);
+        let amtOil = parseFloat(0);
+        if (pageLoaded === true) {
             for (let d of diffuserItem) {
-                 amtDiff += ((d.quantity) * (d.diffusers.cost));
+                amtDiff += ((d.quantity) * (d.diffusers.cost));
             }
 
             for (let e of oilItem) {
-               amtOil += ((e.quantity) * (e.oils.cost));
+                amtOil += ((e.quantity) * (e.oils.cost));
             }
             return formatPrice(amtDiff + amtOil);
         }
@@ -201,25 +219,24 @@ export default function Cart() {
         history.push(`/shipping`, {
             'diffusers': diffuserItem,
             'oils': oilItem,
-            'total':displayFinalAmt()
+            'total': displayFinalAmt()
         });
     }
 
     return (
         <React.Fragment>
             <div className="container">
-                <h4 className="mt-3">Diffuser Cart</h4>
+                <h4 className="product-headers mt-4">Diffuser Cart</h4>
                 {pageLoaded ? displayDiffuserItems() : null}
-               
-                <h4 className="mt-3">Essential Oil Cart</h4>
+
+                <h4 className="product-headers mt-4">Essential Oil Cart</h4>
                 {pageLoaded ? displayOilItems() : null}
 
-                <div>
-                    <h3>Total Amount: {displayFinalAmt()} SGD</h3>
-                    
+                <div className="checkout-total">
+                    <h3 className="checkout-amt-text">Total Amount: {displayFinalAmt()} SGD</h3>
+                    <Button className="mt-4 mb-4 confirm-btn" color="info" onClick={confirmOrder}>Proceed to Checkout</Button>
                 </div>
                 <div>
-                    <Button className="mt-4 mb-4" outline color="info" onClick={confirmOrder}>Proceed to Checkout</Button>
                 </div>
             </div>
         </React.Fragment>
