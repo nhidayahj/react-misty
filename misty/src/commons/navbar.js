@@ -1,29 +1,169 @@
+import React, { useState } from 'react';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  NavbarText
+} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown'
+import signin from '../icons/signin.png'
+import user from '../icons/user.png'
 
-export default function NavbarPage() {
-    return (
-        
-            <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
+const NavBar = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
+
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  if (localStorage.getItem('customer_id') !== null) {
+      return (
+        <div>
+          <Navbar color="light" light expand="md">
+            <NavbarBrand href="/">Misty</NavbarBrand>
+            <NavbarToggler onClick={toggle} />
+            <Collapse isOpen={isOpen} navbar>
+              <Nav className="mr-auto" navbar>
+                <NavItem>
+                <Link to="/about">
+                  <NavLink>Who Are We</NavLink>
+                  </Link>
+                </NavItem>
+                <Link to="/contact">
+                <NavItem>
+                  <NavLink>Contact Us</NavLink>
+                </NavItem>
+                </Link>
+                
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    Catalog
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                      <Link to="/diffusers">
+                    <DropdownItem>
+                      Diffusers
+                    </DropdownItem>
+                        </Link>
                     
-                </Navbar.Collapse>
-            </Navbar>
+                    <Link to="/oils"><DropdownItem>
+                      Essential Oils 
+                    </DropdownItem>
+                    </Link>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              </Nav>
+              <Nav className="ml">
+                  <NavbarText>Welcome</NavbarText>
+                  <UncontrolledDropdown>
+                  <DropdownToggle nav caret>
+                    <span><img src={user} alt="signin-icon" width="25px" height="25px"/>
+                    </span>
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <Link to="/profile">
+                        <DropdownItem>
+                        Account
+                        </DropdownItem>
+                    </Link>
+                    <Link to="/profile/cart">
+                    <DropdownItem>
+                      Cart
+                    </DropdownItem>
+                    </Link>
+                    <DropdownItem divider />
+                    <Link to="/logout">
+                    <DropdownItem>
+                      Logout
+                    </DropdownItem>
+                    </Link>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+                
+              </Nav>
     
-    )
+              
+            </Collapse>
+          </Navbar>
+        </div>
+      );
+  } else {
+      return (
+          <div>
+          <Navbar color="light" light expand="md">
+            <NavbarBrand href="/">Misty</NavbarBrand>
+            <NavbarToggler onClick={toggle} />
+            <Collapse isOpen={isOpen} navbar>
+              <Nav className="mr-auto" navbar>
+                <Link to="/about">
+                <NavItem>
+                  <NavLink>Who Are We</NavLink>
+                </NavItem>
+                </Link>
+                <Link to="/contact">
+                <NavItem>
+                  <NavLink>Contact Us</NavLink>
+                </NavItem>
+                </Link>
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    Catalog
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                      <Link to="/diffusers">
+                    <DropdownItem>
+                      Diffusers
+                    </DropdownItem>
+                    </Link>
+                    <Link to="/oils">
+                    <DropdownItem>
+                      Essential Oils 
+                    </DropdownItem>
+                    </Link>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              </Nav>
+              <Nav className="ml">
+                  <UncontrolledDropdown>
+                  <DropdownToggle nav caret>
+                    <span><img src={signin} alt="signin-icon" width="25px" height="25px"/>
+                    </span>
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <Link to="/signup">
+                    <DropdownItem>
+                      Join Us
+                    </DropdownItem>
+                    </Link>
+                    <Link to="/membership">
+                    <DropdownItem>
+                      Membership
+                    </DropdownItem>
+                    </Link>
+                    <DropdownItem divider />
+                    <Link to="/login">
+                    <DropdownItem>
+                      Log In
+                    </DropdownItem>
+                    </Link>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              </Nav>
+            </Collapse>
+          </Navbar>
+        </div>
+      );
+      
+  }
+
 }
+
+export default NavBar;

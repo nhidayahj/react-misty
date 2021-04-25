@@ -41,30 +41,35 @@ export default function Login() {
     }
 
 
-function invalidLogin() {
-    return <React.Fragment>
-        <div className="alert alert-danger">
-            <p>Incorrect login credentials</p>
-        </div>
-    </React.Fragment>
-}
-
-return (
-    <React.Fragment>
-        <div className="container">
-            <div className="form-group">
-                <label>Email</label>
-                <input type="email" className="form-control"
-                    name="email" value={memberData.email} onChange={updateForm} />
+    function invalidLogin() {
+        return <React.Fragment>
+            <div className="alert alert-danger">
+                <p>Incorrect login credentials</p>
             </div>
-            <div className="form-group">
-                <label>Password</label>
-                <input type="password" className="form-control"
-                    name="password" value={memberData.password} onChange={updateForm} />
-            </div>
-            <Button class="btn btn-primary mt-4" onClick={loginUser}>Login</Button>
-        </div>
+        </React.Fragment>
+    }
 
-    </React.Fragment>
-)
+    return (
+        <React.Fragment>
+            <div className="container mt-4 mb-4">
+                <div className="profile-box register">
+                    <h3 className="profile-title">Welcome Back</h3>
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input type="email" className="form-control"
+                            name="email" value={memberData.email} 
+                            onChange={updateForm}/>
+                    </div>
+                    <div className="form-group">
+                        <label>Password</label>
+                        <input type="password" className="form-control"
+                            name="password" value={memberData.password} onChange={updateForm} />
+                    </div>
+                    <button className="btn btn-primary mt-4 login-btn" 
+                    onClick={loginUser}>Login</button>
+                </div>
+            </div>
+
+        </React.Fragment>
+    )
 }

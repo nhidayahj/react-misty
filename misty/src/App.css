@@ -2,61 +2,179 @@
 #shop-logo{
     display: block;
     margin: 12px auto 12px auto;
-    width: 275px;
-     height:275px;
+    width: 288px;
+    height:288px;
 }
 
-.MDBNavItem {
-    color:black;
-}
 
-.product-img {
-    width:200px;
-    height:370px;
-    object-fit: cover;
-    margin-bottom:3px;
-}
 
 .product-card {
     margin-bottom:12px;
+    height:auto;
 }
+
 
 .product-body{
     padding:10px;
 }
 
-p, .product-desc {
-    height:5%;
+.sampleCard {
+     border:1px solid gray;
+    /* background-color: yellow; */
+    width:313px;
+    height:476px;
+    margin: 12px auto 12px auto;
+    position:relative;
+}
+
+.sampleInfo {
+    padding:12px;
+    background-color: whitesmoke;
+    height:210px;
+    width:310px;
+    position: absolute;
+    bottom:10px;
+}
+.product-image {
+    position:absolute;
+    width:310px;
+    height:240px;
+    background-color:green;
+}
+
+.product-img {
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    margin-bottom:3px;
+}
+
+.product-price {
+    /* position: absolute; */
+    bottom:5px;
+    margin-left: 10px;
     font-family: 'EB Garamond', serif;
-    font-size: 18px;
-
-    
+    font-size:18px;
+    font-weight: bolder;
+    letter-spacing: 2px;
 }
 
-.nav {
-    margin-top:18px;
-    background-color: rgb(255, 255, 255);
-   
+.product-cart-btn {
+    position:absolute;
+    right:20px;
+    bottom:3px;
 }
 
-.navbar-nav{
-    flex-direction: row;
+.product-card-title{
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size:18px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
+
+.product-desc {
+    font-family: 'EB Garamond', serif;
+    font-size:18px;
+    padding:10px;
+    letter-spacing: 1px;
+}
+
+p {
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+    font-size: 22px;  
+    letter-spacing: 1px;  
+}
+
 
 .nav-item{
     font-family: 'EB Garamond', serif;
-    font-size:32px;
+    font-size:22px;
 }
 
+.page-banner {
+    /* border:2px solid black; */
+    /* background-color: yellow; */
+    margin:15px auto 15px auto;
+    padding:55px;
+    
+    
+}
+.product-headers {
+    font-family: 'EB Garamond', serif;
+    font-size:43px;
+    color:gray;
+    letter-spacing:2px;
+    text-align: center;
+}
+
+.product-cat {
+   font-family: 'EB Garamond', serif;
+   letter-spacing: 2px;
+   margin-left:8px; 
+}
+
+
+
+
+.profile-box {
+    border: 2px solid gray;
+    border-radius: 3rem;
+     box-shadow: 3px 10px #888888;
+    padding:20px;
+}
+.profile-title {
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+    font-weight: bold;
+    
+}
+
+.register-btn  {
+    width:100%;
+    padding:12px;
+    font-size:18px;
+    font-family: 'EB Garamond', serif;
+}
+
+.login-btn {
+    width:100%;
+    padding:12px;
+    font-size:22px;
+    font-family: 'EB Garamond', serif;
+}
+
+
+@media screen and (max-width:321px) {
+    .sampleCard{
+        width:100%;
+    }
+    .sampleInfo {
+        position: absolute;
+        width:90vw;
+    }
+    .product-image {
+        position: absolute;
+        width:90vw;
+    }
+    .product-img {
+        position: absolute;
+        width:90vw;
+    }
+
+} 
 
 @media screen and (max-width:426px) {
     #shop-logo{
          margin-left: auto; 
-    margin-right:auto;   
+        margin-right:auto;   
         height:200px;
         width:200px;
     }
 }
+
+
 
 @media screen and (max-width:769px) {
     .nav-item{

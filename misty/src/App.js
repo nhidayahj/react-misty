@@ -3,15 +3,14 @@ import './App.css';
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import signin from './icons/signin.png'
-import enter from './icons/enter.png'
+
 import misty from './icons/misty.png'
 import config from './config';
 import axios from 'axios';
 
 // import pages
-// import NavbarPage from './commons/navbar'
-import Home from './pages/Home';
+import Diffusers from './pages/products/Diffusers';
+import Oils from './pages/products/Oils';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import Register from './pages/members/Register';
@@ -21,6 +20,7 @@ import Profile from './pages/members/Profile';
 import Cart from './pages/members/Cart';
 import ConfirmOrder from './pages/members/ConfirmOrder';
 import Checkout from './pages/members/Checkout';
+import NavBar from './commons/navbar'
 
 
 
@@ -38,49 +38,23 @@ function App() {
     });
     return (
         <React.Fragment>
-            <div className="header">
-                <img src={misty} alt="shop-brand" id="shop-logo"/>
-            </div>
-        
             <Router>
-
-                <ul className="nav justify-content-center">
-
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/about">Who Are We</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/contactus">Contact Us</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/">Catalog</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/signup">Sign Up</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/login">Login</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/profile">Profile</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/profile/logout">Logout</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/profile/cart">Cart</Link>
-                    </li>
-
-                </ul>
+                <NavBar />
+                    <div className="header">
+                        <img src={misty} alt="shop-brand" id="shop-logo" />
+                    </div>
                 <Switch>
                     <Route exact path='/about'>
                         <AboutUs />
                     </Route>
-                    <Route exact path='/contactus'>
+                    <Route exact path='/contact'>
                         <ContactUs />
                     </Route>
-                    <Route exact path='/'>
-                        <Home />
+                    <Route exact path='/diffusers'>
+                        <Diffusers />
+                    </Route>
+                    <Route exact path='/oils'>
+                        <Oils />
                     </Route>
                     <Route exact path='/signup'>
                         <Register />

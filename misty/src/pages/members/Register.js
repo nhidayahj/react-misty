@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import config from '../../config'
 import axios from 'axios';
@@ -10,7 +10,7 @@ export default function Register() {
         'email': '',
         'password': '',
         'contact': '',
-        'dob':'',
+        'dob': '',
 
     })
     const history = useHistory();
@@ -26,7 +26,7 @@ export default function Register() {
         })
 
         history.push('/new-member', {
-            member:memberData
+            member: memberData
         })
     }
 
@@ -38,37 +38,40 @@ export default function Register() {
 
     return (
         <React.Fragment>
-            <div class="container">
-                <h3>Sign Up!</h3>
-                <div className="form-group">
-                    <label>Full Name</label>
-                    <input type="text" className="form-control"
-                        name="fullname" value={memberData.fullname} onChange={updateForm} />
-                </div>
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" className="form-control"
-                        name="email" placeholder="example@mail.com"
-                        value={memberData.email} onChange={updateForm} />
-                </div>
-                <div className="form-group">
-                    <label>Contact</label>
-                    <input type="text" className="form-control"
-                        name="contact" value={memberData.contact} onChange={updateForm} />
-                </div>
-                <div className="form-group">
-                    <label>Date of Birth</label>
-                    <input type="date" className="form-control"
-                        name="dob" placeholder="YYYY-MM-DD"
-                        value={memberData.dob} onChange={updateForm} />
-                </div>
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control"
-                        name="password" value={memberData.password} onChange={updateForm} />
-                </div>
-                <div>
-                    <button className="btn btn-success btn-sm mt-4" onClick={submitRegistration}>Register</button>
+            <div class="container mt-4 mb-4">
+                <div className="profile-box">
+                    <h3 className="profile-title">Be a Misty Member</h3>
+                    <div className="form-group">
+                        <label>Full Name</label>
+                        <input type="text" className="form-control"
+                            name="fullname" value={memberData.fullname} onChange={updateForm} />
+                    </div>
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input type="email" className="form-control"
+                            name="email" placeholder="example@mail.com"
+                            value={memberData.email} onChange={updateForm} />
+                    </div>
+                    <div className="form-group">
+                        <label>Contact No.</label>
+                        <input type="text" className="form-control"
+                            name="contact" value={memberData.contact} onChange={updateForm} />
+                    </div>
+                    <div className="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" className="form-control"
+                            name="dob" placeholder="YYYY-MM-DD"
+                            value={memberData.dob} onChange={updateForm} />
+                    </div>
+                    <div className="form-group">
+                        <label>Password</label>
+                        <input type="password" className="form-control"
+                            name="password" value={memberData.password} onChange={updateForm} />
+                    </div>
+                    <div>
+                        <button className="btn btn-success mt-4 mb-4 register-btn" 
+                        onClick={submitRegistration}>Register</button>
+                    </div>
                 </div>
             </div>
         </React.Fragment>
