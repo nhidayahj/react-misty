@@ -119,7 +119,7 @@ export default function Diffusers() {
                                     <Badge pill className="product-cat">{diffuser.category.name}</Badge>
                                     <div className="product-desc">{diffuser.description}</div>
                                     <div className="product-price">{formatPrice(diffuser.cost)} SGD</div>
-                                    <Button className="product-cart-btn"
+                                    <Button className="product-cart-btn" name={diffuser.id}
                                         onClick={diffAddToCart}><span><img src={cart} alt="cart-icon"/></span></Button>
 
                                 </div>
@@ -151,7 +151,7 @@ export default function Diffusers() {
         //         </React.Fragment>
         //     )
         // } 
-        else if (diffusers.length < 1) {
+        else if (!diffusers || diffusers.length < 1) {
             return (
                 <React.Fragment>
                     <div className="container alert alert-danger">

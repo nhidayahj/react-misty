@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { Button } from 'reactstrap'
-
+import NavBar from '../../commons/navbar';
 const baseUrl = config.baseUrl;
 
 export default function Login() {
@@ -41,6 +41,7 @@ export default function Login() {
 
     return (
         <React.Fragment>
+            
             <div className="container mt-4 mb-4">
                 <div className="profile-box register">
                     <h3 className="profile-title">Welcome</h3>

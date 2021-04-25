@@ -14,9 +14,28 @@ export default function Cart() {
     const [customer, setCustomer] = useState('')
     const [diffuserItem, setDiffuser] = useState([]);
     const [oilItem, setOil] = useState([]);
+    const [isCartFull, setCartFull] = useState(false);
     const [pageLoaded, isPageLoaded] = useState(false);
 
 
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         const fetch = async () => {
+    //             let paymentHist = await axios.get(`${baseUrl}/api/checkout/${localStorage.getItem('customer_id')}/latest/orders`);
+    //             console.log(paymentHist.data);
+    //             try {
+    //                 // customer has not made payment yet
+    //                 console.log("display cart history")
+    //                 setCartFull(true);
+    //             } catch (e) {
+    //                 // payment has been done
+    //                 console.log("Browse our catalog");
+    //                 setCartFull(false);
+    //             }
+    //         }
+    //         fetch();
+    //     }, 500)
+    // }, [])
 
     useEffect(() => {
         const fetch = async () => {
@@ -35,7 +54,7 @@ export default function Cart() {
                 isPageLoaded(true);
             }
             else {
-                // if customer not logged in, then re-direct to log in page
+                // console.log("Your last payment is completed")
             }
         }
         fetch();
@@ -139,7 +158,7 @@ export default function Cart() {
 
             diffuserCart.push(
                 <React.Fragment>
-                   
+
                     <div className="container mt-3 mb-3">
                         <ListGroup className={`${d.diffusers.id}`} >
                             <img src={d.diffusers.image_url} className="cart-item-img"
@@ -151,14 +170,14 @@ export default function Cart() {
                                 </div>
                                 <div className="cart-actions mt-3">
                                     <Button outline color="success" size="sm" name={d.diffusers.id} onClick={incrementDiffQty} value={d.quantity}>+</Button>{' '}
-                                    
+
                                     <Button outline color="danger" size="sm" name={d.diffusers.id} onClick={decrementDiffQty} value={d.quantity}>-</Button>{' '}
                                     <Button className="cart-update" size="sm" name={d.diffusers.id} onClick={updateDiffQty} value={d.quantity}>Update</Button>{' '}
-                                    <Button className="cart-remove"color="danger" size="sm" name={d.diffusers.id} onClick={removeDiff}>Remove</Button>
+                                    <Button className="cart-remove" color="danger" size="sm" name={d.diffusers.id} onClick={removeDiff}>Remove</Button>
                                 </div>
                             </ListGroupItem>
                             <ListGroupItem id={d.diffuser_id} className="cart-price"
-                            name={d.diffusers.id}>Price: {(formatPrice(d.diffusers.cost) * (d.quantity)).toFixed(2)} SGD</ListGroupItem>
+                                name={d.diffusers.id}>Price: {(formatPrice(d.diffusers.cost) * (d.quantity)).toFixed(2)} SGD</ListGroupItem>
                         </ListGroup>
                     </div>
                 </React.Fragment>
@@ -181,12 +200,12 @@ export default function Cart() {
                         <div className="mt-3">
                             <Button outline color="success" size="sm" name={i.oils.id} onClick={incrementOilQty} value={i.quantity}>+</Button>{' '}
                             <Button outline color="danger" size="sm" name={i.oils.id} onClick={decrementOilQty} value={i.quantity}>-</Button>{' '}
-                            <Button className="cart-update"  size="sm" name={i.oils.id} onClick={updateOilQty} value={i.quantity}>Update</Button>{' '}
-                            <Button className="cart-remove"  size="sm" name={i.oils.id} onClick={removeOil}>Remove</Button>
+                            <Button className="cart-update" size="sm" name={i.oils.id} onClick={updateOilQty} value={i.quantity}>Update</Button>{' '}
+                            <Button className="cart-remove" size="sm" name={i.oils.id} onClick={removeOil}>Remove</Button>
                         </div>
                     </ListGroupItem>
                     <ListGroupItem className="cart-price"
-                    id={i.oil_id}>Price: {(formatPrice(i.oils.cost) * (i.quantity)).toFixed(2)} SGD</ListGroupItem>
+                        id={i.oil_id}>Price: {(formatPrice(i.oils.cost) * (i.quantity)).toFixed(2)} SGD</ListGroupItem>
                 </ListGroup>
 
 
@@ -223,6 +242,15 @@ export default function Cart() {
         });
     }
 
+    function displayCheckoutBtn() {
+        return (
+            <React.Fragment>
+                <h3 className="checkout-amt-text">Total Amount: {displayFinalAmt()} SGD</h3>
+                <Button className="mt-4 mb-4 confirm-btn" color="info" onClick={confirmOrder}>Proceed to Checkout</Button>
+            </React.Fragment>
+        )
+    }
+
     return (
         <React.Fragment>
             <div className="container">
@@ -233,8 +261,9 @@ export default function Cart() {
                 {pageLoaded ? displayOilItems() : null}
 
                 <div className="checkout-total">
-                    <h3 className="checkout-amt-text">Total Amount: {displayFinalAmt()} SGD</h3>
-                    <Button className="mt-4 mb-4 confirm-btn" color="info" onClick={confirmOrder}>Proceed to Checkout</Button>
+                    {displayCheckoutBtn()}
+                    {/* {isCartFull ? displayCheckoutBtn : null} */}
+                   
                 </div>
                 <div>
                 </div>

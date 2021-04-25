@@ -91,7 +91,7 @@ export default function Oils() {
 
                                     <div className="product-desc">{e.description}</div>
                                     <div className="product-price">{formatPrice(e.cost)} SGD</div>
-                                    <Button className="product-cart-btn"
+                                    <Button className="product-cart-btn" name={e.id}
                                         onClick={oilAddToCart}><span><img src={cart} alt="cart-icon"/></span></Button>
 
                                 </div>

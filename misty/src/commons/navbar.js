@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Collapse,
   Navbar,
@@ -23,8 +23,16 @@ const NavBar = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [customer, setCustomer] = useState(false);
 
-  if (localStorage.getItem('customer_id') !== null) {
+  useEffect(() => {
+    let customer = localStorage.getItem('customer_id');
+    setLoggedIn(true);
+    setCustomer(customer);
+  },[loggedIn])
+
+  if (customer && loggedIn===true) {
+      
       return (
         <div>
           <Navbar color="light" light expand="md">
