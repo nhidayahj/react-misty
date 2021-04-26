@@ -125,7 +125,7 @@ export default function Checkout() {
                 <div className='mb-3 checkout-total'>
                     <h4 className="checkout-amt-text">Total Amount: {totalAmt} SGD</h4>
                 <a href=
-                    {"https://tgc11-misty.herokuapp.com/api/checkout/process_payment/" + localStorage.getItem('customer_id') + "/confirm"}
+                    {"https://tgc11-misty.herokuapp.com/api/checkout/" + localStorage.getItem('customer_id') + "/confirm"}
                     className="btn mt-4 mb-4 checkout-btn">Payment</a>
                 </div>
             </div>
