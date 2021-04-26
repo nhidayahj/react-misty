@@ -106,6 +106,12 @@ All mandatory relationships and tables are presented in the Logical Schema diagr
 # Skeleton 
 ## Interface Design
 For the vendors, product stocks and orders are organized in a table manner. 
+Diffuser Tables: 
+![vendor](misty/src/readmeImg/vendor.png)
+
+Orders Table for both diffusers and Oils 
+![vendor-orders](misty/src/readmeImg/vendor-orders.png)
+
 
 
 # Surface 
