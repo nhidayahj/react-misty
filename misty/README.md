@@ -1,7 +1,7 @@
 # Fullstack Web Development
 
-# Project Summary 
-The e-commerce webpage is build and inspired by yoga trainers and meditation instructors who comes together and decided to 
+# Aroma Misty - Project Summary 
+The e-commerce webpage (Aroma Misty) is build and inspired by yoga trainers and meditation instructors who comes together and decided to 
 set up a business togeher by selling diffusers and essential oils as aromatherapy also plays a huge part during these practices
 
 # How to Use 
@@ -100,32 +100,78 @@ These are the requirements needed to ensure end-user's goals are met:
 # Structure 
 ## ER Diagram 
 All mandatory relationships and tables are presented in the Logical Schema diagram
-![project3](/src/readmeImg/project3.PNG)
+![project3](https://user-images.githubusercontent.com/60766668/116097464-bedb6f80-a6dc-11eb-8846-4b1ed4fdbbb6.PNG)
 
 
 # Skeleton 
 ## Interface Design
-For the vendors, product stocks and orders are organized in a table manner. 
-Diffuser Tables: 
-![vendor](misty/src/readmeImg/vendor.png)
+For the vendors, product stocks and orders are organized in a table-list manner.
+For customer's interface, products are layout in cards-deck format. 
 
-Orders Table for both diffusers and Oils 
-![vendor-orders](misty/src/readmeImg/vendor-orders.png)
+## Site Map 
+Vendor Site Map
+![vendor-site](https://user-images.githubusercontent.com/60766668/116097566-d74b8a00-a6dc-11eb-8ff4-a8278731e9f0.PNG)
 
+Customer Site Map
+![customer](https://user-images.githubusercontent.com/60766668/116097621-e5010f80-a6dc-11eb-8f94-2789eb6db81e.PNG)
 
 
 # Surface 
-
-# Features 
+## Theme 
+The color theme of the webpage represents calmness and relaxation. Colors are neutral 
+and simple.
 
 # Deployment 
+Ensure all recent changes has been pushed to GitHub. 
 
+Aroma Misty is deployed on Netlify: 
+
+Database backend is deployed on Heroku: 
 
 # Technologies Used 
-- Express 
+All technologies used on NodeJS and are done in Gitpod IDE
 
+Api, 
+- [Axios](https://github.com/axios/axios)
+- [ARC](https://install.advancedrestclient.com/install) - Advance Rest Client (for testing of routes)
+
+Database 
+- [MySQL] - MySQL Extension in GitPod
+- [sqlDBM](https://sqldbm.com/Home/) - Logical Schema Diagram
+- [DB-Migrate](https://github.com/db-migrate) - Database migration
+
+Deployment
+- [Heroku](https://www.heroku.com/) - Backend Express
+- [Netlify](https://netlify.app/) - Frontend React
+
+Styling
+- [Reactstrap](https://reactstrap.github.io/) - Frontend React
+- [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) - Frontend
+- [Handlebars](https://handlebarsjs.com/) - For Express template engine
+
+Form-Helpers
+- [Caolan-Forms](https://github.com/caolan/forms)
+
+ORM (Object Relational Mapping)
+- [Bookshelf](https://bookshelfjs.org/)
+
+Third-Party Applications 
+- [UploadCare](https://uploadcare.com/) - storing images
+- [Stripes](https://stripe.com/en-sg) - payment checkouts
+
+Icons
+- [Icons](https://www.flaticon.com/)
+
+Others:
+- CORS
+- csurf
+- jsonwebtoken(jwt)
+- knex
 
 
 # Acknowledgements
+- Mr Paul Chor, Instructor - For all the guidance and help 
+- Mr Benjamin Png - For all the suggestions and debugging issues
 
+Images and names are just for sample and examples. This is a personal project. 
 
