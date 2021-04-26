@@ -21,6 +21,7 @@ export default function AboutUs() {
                             </p>
                         </div>
                     </div>
+                    
                 </div>
                 <div className="info-two">
                     <div className="info-img-two">
