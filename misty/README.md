@@ -126,7 +126,162 @@ Ensure all recent changes has been pushed to GitHub.
 
 Aroma Misty is deployed on Netlify: 
 
-Database backend is deployed on Heroku: 
+Database backend is deployed on Heroku: [Aroma-Misty](https://tgc11-misty.herokuapp.com/) Backend
+
+## Deployment Steps
+### Express.js deployment to Heroku
+1. In terminal command, download and install Heroku 
+``` npm install -g heroku ```
+
+2. After installing, log in to your Heroku account 
+``` heroku login -i```
+
+3. Create Heroku App (Name must be unique and ***must not have underscores***)
+``` heroku create <app-name>```
+
+4. Create ***Procfile*** with capital P, with no extension and must be in same root directory
+as ***index.js***
+
+5. Inside Procfile, include this line:
+`web: node index.js`
+
+6. Add a 'start' script to package.json file 
+```
+ {
+ "name": "06-api-auth",
+ "version": "1.0.0",
+ "description": "",
+ "main": "index.js",
+ "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1",
+     "start": "node index.js"
+ },
+ . . .
+ }
+ ```
+
+7. In index.js, change the current port number in ***app.listen*** from 
+3000 to process.env.PORT
+
+8. ***Save all files** and Push all the changes made to Heroku 
+- Ensure .gitignore has *node_modules*, *.env*, *sessions/*  included in it. 
+ ```
+git add . 
+git commt -m "<message>"
+git push heroku master 
+ ```
+
+9. The current Aroma Misty project, is using MySQL as database. However, we need to
+create an external database, hosted on external server such as Postgres or ClearDB. We
+will be using Postgres here instead.
+
+In terminal: 
+```heroku addons:create heroku-postgresql```
+
+10. Once completed, go to your Heroku account and open the newly created application.
+In settings, go to "Reveal Config"
+
+There should be a DATABASE_URL setting 
+
+***Copy and paste it on a Notepad*** (will be needing this info)
+
+11. Make another copy of .env file in Notepad (this is the original copy)
+
+12. Copy pasted DATABASE_URL has the following infomation: 
+```
+The syntax is postgres://<user>:<password>@<host>/<database_name>?reconnect = true
+
+Example:
+postgres://b80f8d428xxxxx:f48exxxx@us-cdbr-iron-east-02.cleardb.net/heroku_58632fb6debxxxx?reconnect=true
+
+# host will be: us-cdbr-iron-east-02.cleardb.net
+
+# user will be: B80f8d428xxxxx
+
+# password will be: F48exxxx
+
+# database_name will be: heroku_58632fb6debxxxx
+```
+
+13. In your .env file, change the settings of DB_DRIVER to *postgres*
+Update .env file to the following now: (Copy from your DB URL)
+```
+DB_HOST:us-cdbr-iron-east-02.cleardb.net
+DB_USER:B80f8d428xxxxx
+DB_NAME:heroku_58632fb6debxxxx
+DB_PASSWORD:F48exxxx
+```
+14. In *database.json* ensure it has all of these: 
+```
+{
+    "dev": {
+        "driver": {"ENV" :"DB_DRIVER"},
+        "user": {"ENV": "DB_USER" },
+        "password": {"ENV":"DB_PASSWORD"},
+        "database": {"ENV":"DB_DATABASE"},
+        "host": {"ENV":"DB_HOST"},
+        "ssl": {
+            "rejectUnauthorized": false
+        }
+    }
+}
+```
+
+15. In *bookshelf/index.js*, include these changes:
+```
+const knex = require('knex')({
+    'client': process.env.DB_DRIVER,
+    'connection': {
+        'user': process.env.DB_USER,
+        'password': process.env.DB_PASSWORD,
+        'database': process.env.DB_DATABASE,
+        'host':process.env.DB_HOST,
+        'ssl': {
+            'rejectUnauthorized': false
+        }
+    }
+})
+```
+
+***NOTE*** Since we have changed database from MySQL to Postgres, the new database is 
+clean and does not have any tables. Your original data are still on your local host, you
+can view them back by changing the DB settings to MySQL, (or retrieve from your original copy saved in Notepad)
+
+16. Save all files. And in terminal:
+```./db-migrate.sh up```
+
+17. Back in Heroku, in *"Config Variables"* , ensure all the .env settings are also included here.
+
+18. ***Save all files, and do commit push to Heroku*** since changes has been made to our code
+
+19. Since our Postgres is empty, download a community version of [DBeaver](https://dbeaver.io/)
+and install in computer. 
+
+After downloading and launching DB-Beaver.
+
+From the pop up window, select *Postgres*
+It will then request to download some necessary files. Allow the operation.
+In the window that shows up next, fill in the Postgres database you obtained in step 12. Once finished, click on the Finish button.
+The new connection will appear on the left hand side window. Double click on it. You will be able to see all your tables once you collapse the schemas then publics folder:
+
+20. Go to ***Stripe**, and add in a new endpoint for https:"heroku url"/checkout/process_payment, and replace the old endpoint secret with the new one in your Heroku settings.
+
+
+### React.js deployment to Netlify
+1. After confirming and pushing the final build of the project, run the command
+```
+npm run build
+```
+2. A build folder should be created in the explorer. Download the file and unzip build.tar
+
+3. Log into Netlify.com and go to the Sites tab
+
+4. Drag the build folder into the box that says "Drag and drop your site output folder here"
+
+5. Wait for the project to be deployed.
+
+
+*Deployment steps taken with courtesy from Paul Chor* 
 
 # Technologies Used 
 All technologies used on NodeJS and are done in Gitpod IDE
