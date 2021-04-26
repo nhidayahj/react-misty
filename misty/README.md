@@ -1,4 +1,6 @@
 # Fullstack Web Development
+- Deployed Netlify Application: [Aroma Misty](https://pedantic-hermann-7d8102.netlify.app/)
+- Deployed Heroku Application: [Aroma Misty Backend](https://tgc11-misty.herokuapp.com/)
 
 # Aroma Misty - Project Summary 
 The e-commerce webpage (Aroma Misty) is build and inspired by yoga trainers and meditation instructors who comes together and decided to 
@@ -124,7 +126,7 @@ and simple.
 # Deployment 
 Ensure all recent changes has been pushed to GitHub. 
 
-Aroma Misty is deployed on Netlify: 
+Aroma Misty is deployed on Netlify: [Aroma Mister](https://pedantic-hermann-7d8102.netlify.app/)
 
 Database backend is deployed on Heroku: [Aroma-Misty](https://tgc11-misty.herokuapp.com/) Backend
 
