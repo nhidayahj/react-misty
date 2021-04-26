@@ -1,4 +1,3 @@
-                                                                               1 // import logo from './logo.svg';
 import './App.css';
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
@@ -12,7 +11,6 @@ import axios from 'axios';
 import Diffusers from './pages/products/Diffusers';
 import Oils from './pages/products/Oils';
 import AboutUs from './pages/AboutUs';
-import ContactUs from './pages/ContactUs';
 import Register from './pages/members/Register';
 import NewMembers from './pages/members/NewMembers';
 import Login from './pages/members/Login';
