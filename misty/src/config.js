@@ -1,4 +1,4 @@
 export default {
-    'baseUrl':"https://3002-emerald-herring-pjfc5f72.ws-us03.gitpod.io",
+    'baseUrl':"https://tgc11-misty.herokuapp.com",
     'REFRESH_TOKEN_INTERVAL': 5 * 60 * 1000
 }
