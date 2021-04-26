@@ -136,7 +136,7 @@ export default function Oils() {
             <div className="container">
                 <h3 className="product-headers mt-4">Search Item</h3>
 
-                <div className="form-group">
+                {/* <div className="form-group">
                     <label>Search by Essential Oil</label>
                     <select className="form-control" name={oilName}
                         onChange={e => { setName(e.target.value) }}>
@@ -147,7 +147,7 @@ export default function Oils() {
                         <option value="Tea Tree">Tea Tree Oil</option>
                         <option value="Eucalyptus">Eucalyptus Oil</option>
                     </select>
-                </div>
+                </div> */}
 
                 <div className="form-group">
                     <label>Search by Volume</label>

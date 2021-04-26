@@ -143,11 +143,7 @@ const NavBar = (props) => {
                       Join Us
                     </DropdownItem>
                     </Link>
-                    <Link to="/membership">
-                    <DropdownItem>
-                      Membership
-                    </DropdownItem>
-                    </Link>
+                    
                     <DropdownItem divider />
                     <Link to="/login">
                     <DropdownItem>

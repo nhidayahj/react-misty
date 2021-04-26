@@ -24,6 +24,7 @@ import Checkout from './pages/members/Checkout';
 import NavBar from './commons/navbar'
 import Error from './commons/error'
 import ErrorLogin from './commons/error-login'
+import Payment from './commons/Payment';
 
 
 
@@ -86,6 +87,9 @@ function App() {
                     </Route>
                     <Route exact path='/error-login'>
                         <ErrorLogin />
+                    </Route>
+                    <Route exact path='/payment'>
+                        <Payment />
                     </Route>
 
                 </Switch>

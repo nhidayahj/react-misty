@@ -14,10 +14,11 @@ export default function AboutUs() {
                     </div>
                     <div className="info-desc-one">
                         <div className="info-text">
-                            <p>We are a group of young and passionate individuals yoga and meditation instructors 
-                                who loves anything calm and relaxing. We work alongside professionals in aramotherapy
-                                to give you the specially scented essential oils. 
-                        </p>
+                            <p>We are a group of young and passionate individuals who loves yoga and meditation 
+                               We work alongside professionals in aramotherapy
+                                to give you all the specially scented essential oils. Most of our diffusers are handcrafted 
+                                from artisans all around the the world, to give you that unique touch.
+                            </p>
                         </div>
                     </div>
                 </div>

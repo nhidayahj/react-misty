@@ -92,6 +92,11 @@ export default function Diffusers() {
             let customer_id = localStorage.getItem('customer_id');
             let diffuser = await axios.get(`${baseUrl}/api/shoppingCart/diffuser/${customer_id}/${e.target.name}/addtocart`);
             console.log(diffuser.data);
+            if (diffuser.status == 200) {
+                alert("OK")
+            } else if (diffuser.status !== 200){
+                alert("NOt ok")
+            }
             // setDiffuserCart(diffuser.data);
         }
 
