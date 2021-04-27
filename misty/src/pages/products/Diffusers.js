@@ -89,11 +89,15 @@ export default function Diffusers() {
     const diffAddToCart = async (e) => {
         if (isLoggedIn === true && isLoaded === true) {
             console.log("OK")
+            console.log("id:", e.currentTarget.name);
+            let product_id = e.currentTarget.name;
             let customer_id = localStorage.getItem('customer_id');
-            let diffuser = await axios.get(`${baseUrl}/api/shoppingCart/diffuser/${customer_id}/${e.target.name}/addtocart`);
+            let diffuser = await axios.get(`${baseUrl}/api/shoppingCart/diffuser/${customer_id}/${product_id}/addtocart`);
             console.log(diffuser.data);
+            
             if (diffuser.status == 200) {
-                alert("OK")
+                
+                alert("cart item added")
             } else if (diffuser.status !== 200){
                 alert("NOt ok")
             }
@@ -110,7 +114,7 @@ export default function Diffusers() {
     const displayDiffusers = () => {
         if (diffusers && diffusers.length >= 1) {
             let products = [];
-
+            console.log("All diffusers: ",diffusers)
             for (let diffuser of diffusers) {
                 products.push(
                     <React.Fragment>
@@ -124,8 +128,8 @@ export default function Diffusers() {
                                     <Badge pill className="product-cat">{diffuser.category.name}</Badge>
                                     <div className="product-desc">{diffuser.description}</div>
                                     <div className="product-price">{formatPrice(diffuser.cost)} SGD</div>
-                                    <Button className="product-cart-btn" name={diffuser.id}
-                                        onClick={diffAddToCart}><span><img src={cart} alt="cart-icon"/></span></Button>
+                                    <button className="product-cart-btn"  name={diffuser.id}
+                                        onClick={diffAddToCart}><span><img src={cart} alt="cart-icon"/></span></button>
 
                                 </div>
                             </div>

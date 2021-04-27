@@ -116,10 +116,18 @@ export default function Oils() {
 
     const oilAddToCart = async (e) => {
         if (isLoggedIn === true && isLoaded === true) {
+            let product_id = e.currentTarget.name;
             let customer_id = localStorage.getItem('customer_id');
-            let oil = await axios.get(`${baseUrl}/api/shoppingCart/oil/${customer_id}/${e.target.name}/addtocart`)
+            let oil = await axios.get(`${baseUrl}/api/shoppingCart/oil/${customer_id}/${product_id}/addtocart`)
             console.log(oil.data);
+            console.log(product_id)
             // setOilCart(oil.data);
+            if (oil.status == 200) {
+                
+                alert("cart item added")
+            } else if (oil.status !== 200){
+                alert("NOt ok")
+            }
         }
 
         if (isLoggedIn === false) {
