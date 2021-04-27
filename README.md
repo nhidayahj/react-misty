@@ -1,5 +1,5 @@
 # Fullstack Web Development
-- Deployed Netlify Application: [Aroma Misty](https://pedantic-hermann-7d8102.netlify.app/)
+- Deployed Netlify Application: [Aroma Misty](https://upbeat-hermann-9663e2.netlify.app/)
 - Deployed Heroku Application: [Aroma Misty Backend](https://tgc11-misty.herokuapp.com/)
 
 # Aroma Misty - Project Summary 

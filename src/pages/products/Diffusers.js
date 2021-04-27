@@ -2,10 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../config';
-import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button, Badge
-} from 'reactstrap';
+import {Badge} from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 
 import cart from '../../icons/cart.png';
