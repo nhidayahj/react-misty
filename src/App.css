@@ -196,6 +196,7 @@ a.checkout-btn {
     font-family: 'EB Garamond', serif;
     font-weight: bold;
     font-size:32px;
+    letter-spacing: 2px;
     
 }
 
@@ -299,6 +300,7 @@ hr.divider {
 
 .info-text {
     text-align: center;
+    font-size:0.7vw;
 }
 
 
@@ -342,6 +344,11 @@ hr.divider {
     }
     .checkout-img{
         margin-left:20vw;
+    }
+    .info-one {
+        border: 1px solid red;
+        height:40em;
+        background-color: rgb(204, 160, 160);
     }
     
 }

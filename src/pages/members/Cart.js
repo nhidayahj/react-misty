@@ -14,7 +14,6 @@ export default function Cart() {
     const [customer, setCustomer] = useState('')
     const [diffuserItem, setDiffuser] = useState([]);
     const [oilItem, setOil] = useState([]);
-    const [isCartFull, setCartFull] = useState(false);
     const [pageLoaded, isPageLoaded] = useState(false);
 
 
@@ -235,11 +234,15 @@ export default function Cart() {
 
     const history = useHistory();
     const confirmOrder = () => {
-        history.push(`/shipping`, {
-            'diffusers': diffuserItem,
-            'oils': oilItem,
-            'total': displayFinalAmt()
-        });
+        if (diffuserItem.length < 1 || oilItem.length < 1) {
+            alert("Must have at least 1 diffuser and 1 essential oil before checkout");
+        } else {
+            history.push(`/shipping`, {
+                'diffusers': diffuserItem,
+                'oils': oilItem,
+                'total': displayFinalAmt()
+            });
+        }
     }
 
     function displayCheckoutBtn() {
@@ -263,7 +266,7 @@ export default function Cart() {
                 <div className="checkout-total">
                     {displayCheckoutBtn()}
                     {/* {isCartFull ? displayCheckoutBtn : null} */}
-                   
+
                 </div>
                 <div>
                 </div>

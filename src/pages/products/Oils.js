@@ -2,10 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../config';
-import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button,
-} from 'reactstrap';
+import {Button} from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import cart from '../../icons/cart.png'
 
@@ -123,10 +120,9 @@ export default function Oils() {
             console.log(product_id)
             // setOilCart(oil.data);
             if (oil.status == 200) {
-                
-                alert("cart item added")
+                alert("Item added into cart")
             } else if (oil.status !== 200){
-                alert("NOt ok")
+                alert("Item not added")
             }
         }
 

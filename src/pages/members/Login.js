@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { Button } from 'reactstrap'
-import NavBar from '../../commons/navbar';
+// import NavBar from '../../commons/navbar';
 const baseUrl = config.baseUrl;
 
 export default function Login() {

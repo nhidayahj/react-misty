@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect } from 'react';
 import { Alert } from 'reactstrap'
 import axios from 'axios';
 import config from '../../config';

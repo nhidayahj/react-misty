@@ -23,7 +23,7 @@ export default function AboutUs() {
                     </div>
                     
                 </div>
-                <div className="info-two">
+                {/* <div className="info-two">
                     <div className="info-img-two">
                         <img src={diffuser} alt="diffuser-info" className="img-two" />
                     </div>
@@ -35,8 +35,8 @@ export default function AboutUs() {
                         </p>
                         </div>
                     </div>
-                </div>
-                <div className="info-three">
+                </div> */}
+                {/* <div className="info-three">
                     <div className="info-img-three">
                         <img src={oil} alt="oil-info" className="img-three" />
                     </div>
@@ -49,7 +49,7 @@ export default function AboutUs() {
                         </p>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
             </div>
         </React.Fragment>

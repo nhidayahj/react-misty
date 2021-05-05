@@ -93,12 +93,10 @@ export default function Diffusers() {
             console.log(diffuser.data);
             
             if (diffuser.status == 200) {
-                
-                alert("cart item added")
+                alert("Item added into cart")
             } else if (diffuser.status !== 200){
-                alert("NOt ok")
+                alert("Item not added")
             }
-            // setDiffuserCart(diffuser.data);
         }
 
         if (isLoggedIn === false) {
@@ -136,27 +134,6 @@ export default function Diffusers() {
             }
             return products;
         }
-        // else if (diffusers && categoryInfo) {
-        //     return (
-        //         <React.Fragment>
-        //             <div className="col-lg-4 col-md-6">
-        //                 <Card className="product-card">
-        //                     <CardImg className="product-img" src={diffusers.image_url} alt="Card image cap" />
-        //                     <CardBody className="product-body">
-        //                         <CardTitle tag="h5">{diffusers.diffuser_name}</CardTitle>
-        //                         <CardSubtitle tag="h6" className="mb-2 text-muted">{categoryInfo.name}</CardSubtitle>
-        //                         <CardText className="product-desc">{diffusers.description}</CardText>
-        //                         <CardSubtitle tag="h6" className="mb-2 text-muted">{formatPrice(diffusers.cost)} SGD </CardSubtitle>
-        //                         <Button color="warning" className="mr-3 mt-2 product-view">View</Button>
-
-        //                         <Button color="info add-to-cart" name={diffusers.id} onClick={diffAddToCart}
-        //                             className="mt-2 product-view">Add to Cart</Button>
-        //                     </CardBody>
-        //                 </Card>
-        //             </div>
-        //         </React.Fragment>
-        //     )
-        // } 
         else if (!diffusers || diffusers.length < 1) {
             return (
                 <React.Fragment>
@@ -171,6 +148,7 @@ export default function Diffusers() {
     function formatPrice(price) {
         return parseFloat(price / 100.00).toFixed(2)
     }
+
 
     return (
         <React.Fragment>
