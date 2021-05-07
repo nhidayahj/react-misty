@@ -301,7 +301,7 @@ hr.divider {
 }
 
 .info {
-    font-size:1.5em;
+    font-size:18px;
 }
 
 @media screen and (max-width:769px) {
@@ -312,7 +312,7 @@ hr.divider {
         margin-left:20vw;
     }
     .info-one, .info-two, .info-three {
-        height:60vh;
+        height:68vh;
     }
     .info-img-one, .info-img-two, .info-img-three {
         position:absolute;
@@ -323,9 +323,9 @@ hr.divider {
     }
     .info-desc-one, .info-desc-two, .info-desc-three {
         position:absolute;
-        bottom:0;
+        bottom:8px;
         width:100%;
-        height:25vh;
+        height:28vh;
         padding:9px;
     }
     .info{
@@ -354,7 +354,7 @@ hr.divider {
         margin-left:20vw;
     }
     .info-one {
-        height:58vh;
+        height:68vh;
     }
     .info-img-one {
         /* position:absolute;
@@ -367,7 +367,7 @@ hr.divider {
         position:absolute;
         bottom:20px;
         width:100%;
-        height:28vh;
+        height:35vh;
         padding:12px;
         
     }
@@ -400,10 +400,10 @@ hr.divider {
         font-size: 22px;
     }
     .info-one {
-        height: 60vh;
+        height: 72vh;
     }
     .info-desc-one {
-        height:30vh;
+        height:40vh;
     }
 
 } 
