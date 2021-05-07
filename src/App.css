@@ -152,7 +152,7 @@ a.checkout-btn {
     padding:10px 15px;
 }
 
-.nav-item, .cart-qty, .cart-price{
+.nav-item, .cart-qty, .cart-price {
     font-family: 'EB Garamond', serif;
     font-size:22px;
 }
@@ -191,7 +191,7 @@ a.checkout-btn {
      box-shadow: 3px 10px #888888;
     padding:20px;
 }
-.profile-title {
+.profile-title, .navbar-brand {
     text-align: center;
     font-family: 'EB Garamond', serif;
     font-weight: bold;
@@ -249,7 +249,7 @@ hr.divider {
     margin: 18px auto 18px auto;
     border:1px solid gray;
     width:90%;
-    height:35vh;
+    height:38vh;
     /* background-color: rgb(219, 156, 111); */
     position:relative;
 }
@@ -257,9 +257,8 @@ hr.divider {
 .info-img-two{
     position:absolute;
     right:0;
-    /* border: 1px solid red; */
     width:45%;
-    height:35vh;
+    height:38vh;
     background-color: rgb(124, 223, 141);
 }
 
@@ -268,7 +267,7 @@ hr.divider {
     left:0;
     /* border: 1px solid red; */
     width:45%;
-    height:35vh;
+    height:38vh;
     background-color: rgb(124, 223, 141);
 }
 
@@ -284,8 +283,7 @@ hr.divider {
     right:0;
     /* border: 1px solid red; */
     width:55%;
-    height:35vh;
-    /* background-color: rgb(124, 223, 141); */
+    height:40vh;
     padding:12px;
 }
 
@@ -300,31 +298,41 @@ hr.divider {
 
 .info-text {
     text-align: center;
-    font-size:0.7vw;
 }
 
+.info {
+    font-size:1.5em;
+}
 
-@media screen and (max-width:321px) {
-    .sampleCard{
-        width:100%;
-    }
-    .sampleInfo {
-        position: absolute;
-        width:90vw;
-    }
-    .product-image {
-        position: absolute;
-        width:90vw;
-    }
-    .product-img {
-        position: absolute;
-        width:90vw;
-    } 
-    .cart-item-name {
+@media screen and (max-width:769px) {
+    .nav-item{
         font-size: 22px;
     }
-
-} 
+    .cart-img-review{
+        margin-left:20vw;
+    }
+    .info-one, .info-two, .info-three {
+        height:60vh;
+    }
+    .info-img-one, .info-img-two, .info-img-three {
+        position:absolute;
+        left:0;
+        width:100%;
+        height:35vh;
+        background-color: rgb(124, 223, 141);
+    }
+    .info-desc-one, .info-desc-two, .info-desc-three {
+        position:absolute;
+        bottom:0;
+        width:100%;
+        height:25vh;
+        padding:9px;
+    }
+    .info{
+        font-size:20px;
+    }
+       
+}
 
 @media screen and (max-width:426px) {
     #shop-logo{
@@ -346,22 +354,62 @@ hr.divider {
         margin-left:20vw;
     }
     .info-one {
-        border: 1px solid red;
-        height:40em;
-        background-color: rgb(204, 160, 160);
+        height:58vh;
     }
+    .info-img-one {
+        /* position:absolute;
+        left:0; */
+        width:100%;
+        height:28vh;
+        background-color: rgb(124, 223, 141);
+    }
+    .info-desc-one {
+        position:absolute;
+        bottom:20px;
+        width:100%;
+        height:28vh;
+        padding:12px;
+        
+    }
+    .info {
+        font-size:16px;
+    }
+    
     
 }
 
 
 
-@media screen and (max-width:769px) {
-    .nav-item{
+@media screen and (max-width:321px) {
+    .sampleCard{
+        width:100%;
+    }
+    .sampleInfo {
+        position: absolute;
+        width:90vw;
+    }
+    .product-image {
+        position: absolute;
+        width:90vw;
+    }
+    .product-img {
+        position: absolute;
+        width:90vw;
+    } 
+    .cart-item-name {
         font-size: 22px;
     }
-    .cart-img-review{
-        margin-left:20vw;
-        
+    .info-one {
+        height: 60vh;
     }
-       
-}
+    .info-desc-one {
+        height:30vh;
+    }
+
+} 
+
+
+
+
+
+
