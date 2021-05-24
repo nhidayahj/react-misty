@@ -71,10 +71,7 @@ export default function Diffusers() {
           );
           console.log("Low: ", responseLow.data);
           setDiffusers(responseLow.data);
-        } else if (
-          searchPriceRange === "6501" ||
-          searchPriceRange === "10000"
-        ) {
+        } else if (searchPriceRange === "10000") {
           const responseMid = await axios.get(
             `${baseUrl}/api/products/diffuser/mid/${searchPriceRange}`
           );
@@ -83,7 +80,7 @@ export default function Diffusers() {
         } else if (searchPriceRange === "0") {
           const response = await axios.get(`${baseUrl}/api/products/diffusers`);
           setDiffusers(response.data);
-        } else if (searchPriceRange === "65000") {
+        } else if (searchPriceRange === "3501") {
           const responseRange = await axios.get(
             `${baseUrl}/api/products/diffuser/range/${searchPriceRange}`
           );
@@ -195,8 +192,8 @@ export default function Diffusers() {
           >
             <option value="0">All</option>
             <option value="3499"> {"<"} 35 SGD</option>
-            <option value="6500">35 - 65</option>
-            <option value="6501">{">"} 65 SGD</option>
+            <option value="3501">{">"} 35 SGD </option>
+            {/* <option value="6501">{">"} 65 SGD</option> */}
             <option value="10000">{">"} 100 SGD</option>
           </select>
         </div>
