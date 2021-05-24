@@ -80,7 +80,7 @@ export default function Diffusers() {
         } else if (searchPriceRange === "0") {
           const response = await axios.get(`${baseUrl}/api/products/diffusers`);
           setDiffusers(response.data);
-        } else if (searchPriceRange === "3501") {
+        } else if (searchPriceRange === "3500") {
           const responseRange = await axios.get(
             `${baseUrl}/api/products/diffuser/range/${searchPriceRange}`
           );
@@ -192,7 +192,7 @@ export default function Diffusers() {
           >
             <option value="0">All</option>
             <option value="3499"> {"<"} 35 SGD</option>
-            <option value="3501">{">"} 35 SGD </option>
+            <option value="3500">{">"} 35 SGD </option>
             {/* <option value="6501">{">"} 65 SGD</option> */}
             <option value="10000">{">"} 100 SGD</option>
           </select>
