@@ -65,7 +65,7 @@ export default function Diffusers() {
     setTimeout(() => {
       // let range = searchPriceRange;
       const fetch = async () => {
-        if (searchPriceRange === "3499" || searchPriceRange === "6500") {
+        if (searchPriceRange === "3499") {
           const responseLow = await axios.get(
             `${baseUrl}/api/products/diffuser/low/${searchPriceRange}`
           );
@@ -83,6 +83,12 @@ export default function Diffusers() {
         } else if (searchPriceRange === "0") {
           const response = await axios.get(`${baseUrl}/api/products/diffusers`);
           setDiffusers(response.data);
+        } else if (searchPriceRange === "65000") {
+          const responseRange = await axios.get(
+            `${baseUrl}/api/products/diffuser/range/${searchPriceRange}`
+          );
+          console.log("range price: ", responseRange.data);
+          setDiffusers(responseRange.data);
         }
       };
       fetch();
